@@ -9,13 +9,18 @@ namespace outlaw {
 	class Shader {
 		private:
 			GPUID ID;
-			std::map<std::string, GPUID> uniform_locations;
+			std::map<std::string, GPUID> uniform_locations; // TO-DO
 
 		public:
 
-			Shader() {}
+			inline Shader() {}
 
-			/*Load a shader from a source file
+			inline Shader(std::string filename) {
+				load(filename);
+			}
+
+			/*
+			* Load a shader from a source file
 			* This function uses a special format for shaders,
 			* it lets you have a single file for a complete shader
 			* EXAMPLE:

@@ -31,7 +31,11 @@ namespace outlaw {
 
 			// VAO functions
 
-			static GPUID create_vao(VAO_TYPE type);
+			static GPUID create_vao();
+
+			static void setup_vao(VAO_TYPE type = VAO_TYPE::FLAT);
+
+			//TO-DO VAO attributes
 
 			static void bind_vao(GPUID ID);
 
@@ -39,7 +43,7 @@ namespace outlaw {
 
 			// VBO functions
 
-			static GPUID create_buffer(float data[], size_t size, BUFF_USAGE usage);
+			static GPUID create_buffer(float data[], size_t size, BUFF_USAGE usage = BUFF_USAGE::STATIC);
 
 			static void bind_buffer(GPUID ID);
 

@@ -15,26 +15,22 @@ void outlaw::Renderer::init() {}
 
 // VAO functions
 
-GPUID outlaw::Renderer::create_vao(VAO_TYPE type) {
+GPUID outlaw::Renderer::create_vao() {
+
+	GPUID ID;
+	glGenVertexArrays(1, &ID);
+	glBindVertexArray(ID);
+
+	return ID;
+}
+
+void outlaw::Renderer::setup_vao(VAO_TYPE type) {
 
 	if(type == VAO_TYPE::FLAT) {
-
-		GLuint ID;
-		glGenVertexArrays(1, &ID);
-		glBindVertexArray(ID);
-
+		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
 		glEnableVertexAttribArray(0);
-		glVertexAttribPointer(
-			0,
-			3,
-			GL_FLOAT,
-			GL_FALSE,
-			0,
-			(void*) 0
-		);
-
 	} else if(type == VAO_TYPE::INTERLEAVED) {
-		return 0;
+		// TO-DO
 	}
 }
 

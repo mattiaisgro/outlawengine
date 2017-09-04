@@ -6,5 +6,6 @@
 #include "window.h"
 #include "input.h"
 #include "shader.h"
+#include "camera.h"
 
 #endif
