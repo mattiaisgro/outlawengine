@@ -8,8 +8,8 @@ int main(int argc, char const *argv[]) {
 	Window::create();
 
 	// Load default shader
-	Shader s("../res/default.glsl");
-	s.bind();
+	Shader default_shader("../res/default.glsl");
+	default_shader.bind();
 
 	// Create VAO and set it up
 	GPUID VAO = Renderer::create_vao();
@@ -30,16 +30,22 @@ int main(int argc, char const *argv[]) {
 	// Game loop (rudimental)
 	while(true) {
 
+
+		// Update
 		if(Input::isPressed(KEY_ESCAPE)) {
 			Window::setShouldClose(true);
 			break;
 		}
 
+
+		// Render
 		Renderer::clear_screen();
 
 		Renderer::bind_vao(VAO);
 		Renderer::draw_buffer(VBO, 3);
 
+
+		// End loop
 		Window::swapBuffers();
 		Window::pollEvents();
 	}
