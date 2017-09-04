@@ -5,5 +5,6 @@ A C++ rendering engine using OpenGL
 If you use GCC or MinGW, you can compile using `compile.sh` or `compile.bat` based on your system.
 
 ### Dependencies
-* Uroboro (included)
+* Uroboro
+* GLFW 3
 
