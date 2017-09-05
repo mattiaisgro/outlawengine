@@ -15,23 +15,23 @@ int main(int argc, char const *argv[]) {
 
 
 	// Prepare buffer of data
-	vec3 triangle_vertices[3] = {
-		vec3(-1,	-1,		0),
-		vec3(0,		1,		0),
-		vec3(1,		-1,		0)
+	vec3 vertices[] = {
+		vec3(-0.5f, 0.5f, 0),
+		vec3(-0.5f, -0.5f, 0),
+		vec3(0.5f, 0.5f, 0),
+		vec3(0.5f, -0.5f, 0)
 	};
 
-	GPUID VBO = Renderer::create_buffer((float*) triangle_vertices,
-										sizeof(triangle_vertices));
+	GPUID VBO = Renderer::create_buffer((float*) vertices, sizeof(vertices));
 
 	VAOAttrib attributes[] = {
-		VAOAttrib()
+		VAOAttrib() // Default attribute for vertex data
 	};
 
 	Renderer::setup_vao(attributes, sizeof(attributes) / sizeof(VAOAttrib));
 
 	// Game loop (rudimental)
-	while(true) {
+	while(!Window::getShouldClose()) {
 
 
 		// Update
@@ -48,7 +48,7 @@ int main(int argc, char const *argv[]) {
 		mat4 MVP = mat4(1.f);
 		default_shader.setUniform("transform", MVP);
 		Renderer::bind_vao(VAO);
-		Renderer::draw_buffer(VBO, 3);
+		Renderer::draw_buffer(sizeof(vertices) / sizeof(vec3), GLPRIMITIVE::TRIANGLE_STRIP);
 
 
 		// End loop

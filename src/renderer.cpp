@@ -89,10 +89,9 @@ void outlaw::Renderer::destroy_buffer(GPUID ID) {
 	glDeleteBuffers(1, &ID);
 }
 
-void outlaw::Renderer::draw_buffer(GPUID ID, uint count) {
+void outlaw::Renderer::draw_buffer(uint count, GLPRIMITIVE primitive) {
 
-	Renderer::bind_buffer(ID);
-	glDrawArrays(GL_TRIANGLES, 0, count);
+	glDrawArrays((GLenum) primitive, 0, count);
 }
 
 // Shader functions

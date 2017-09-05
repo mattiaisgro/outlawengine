@@ -5,6 +5,22 @@
 
 namespace outlaw {
 
+	enum class BUFF_USAGE {
+		STATIC,
+		DYNAMIC,
+		STREAM
+	};
+
+	enum class GLPRIMITIVE {
+		POINTS = 0x0000,
+		LINES = 0x0001,
+		LINE_LOOP = 0x0002,
+		LINE_STRIP = 0x0003,
+		TRIANGLES = 0x0004,
+		TRIANGLE_STRIP = 0x0005,
+		TRIANGLE_FAN = 0x0006
+	};
+
 	class Renderer {
 		private:
 			Renderer() = delete;
@@ -16,12 +32,6 @@ namespace outlaw {
 			static GPUID currentShader;
 
 		public:
-
-			enum class BUFF_USAGE {
-				STATIC,
-				DYNAMIC,
-				STREAM
-			};
 
 			static void init();
 
@@ -45,7 +55,7 @@ namespace outlaw {
 
 			static void destroy_buffer(GPUID ID);
 
-			static void draw_buffer(GPUID ID, uint count);
+			static void draw_buffer(uint count, GLPRIMITIVE primitive = GLPRIMITIVE::TRIANGLES);
 
 			// Shader functions
 
