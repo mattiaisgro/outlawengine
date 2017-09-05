@@ -7,5 +7,6 @@
 #include "input.h"
 #include "shader.h"
 #include "camera.h"
+#include "vaoattrib.h"
 
 #endif

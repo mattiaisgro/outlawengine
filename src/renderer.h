@@ -1,13 +1,14 @@
 #ifndef OUTLAW_RENDERER_H
 #define OUTLAW_RENDERER_H
 #include "types.h"
+#include "vaoattrib.h"
 
 namespace outlaw {
 
 	class Renderer {
 		private:
-			Renderer();
-			~Renderer();
+			Renderer() = delete;
+			~Renderer() = delete;
 
 			// OpenGL state
 			static GPUID currentVBO;
@@ -22,18 +23,13 @@ namespace outlaw {
 				STREAM
 			};
 
-			enum class VAO_TYPE {
-				FLAT,
-				INTERLEAVED
-			};
-
 			static void init();
 
 			// VAO functions
 
 			static GPUID create_vao();
 
-			static void setup_vao(VAO_TYPE type = VAO_TYPE::FLAT);
+			static void setup_vao(VAOAttrib attributes[], uint count);
 
 			//TO-DO VAO attributes
 

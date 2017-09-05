@@ -25,7 +25,11 @@ int main(int argc, char const *argv[]) {
 	GPUID VBO = Renderer::create_buffer((float*) triangle_vertices,
 										sizeof(triangle_vertices));
 
-	Renderer::setup_vao();
+	VAOAttrib attributes[] = {
+		VAOAttrib()
+	};
+
+	Renderer::setup_vao(attributes, sizeof(attributes) / sizeof(VAOAttrib));
 
 	// Game loop (rudimental)
 	while(true) {

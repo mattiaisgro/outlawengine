@@ -24,13 +24,17 @@ GPUID outlaw::Renderer::create_vao() {
 	return ID;
 }
 
-void outlaw::Renderer::setup_vao(VAO_TYPE type) {
+void outlaw::Renderer::setup_vao(VAOAttrib attributes[], uint count) {
 
-	if(type == VAO_TYPE::FLAT) {
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-		glEnableVertexAttribArray(0);
-	} else if(type == VAO_TYPE::INTERLEAVED) {
-		// TO-DO
+	for (int i = 0; i < count; ++i) {
+		const void* ptr = attributes[i].pointer;
+		glVertexAttribPointer(i,
+								attributes[i].size,
+								(GLenum) attributes[i].type,
+								attributes[i].normalized,
+								attributes[i].stride,
+								ptr);
+		glEnableVertexAttribArray(i);
 	}
 }
 
