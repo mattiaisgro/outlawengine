@@ -1,5 +1,4 @@
 #include "outlaw.h"
-#include "help.h"
 
 using namespace outlaw;
 
@@ -45,6 +44,9 @@ int main(int argc, char const *argv[]) {
 		// Render
 		Renderer::clear_screen();
 
+
+		mat4 MVP = mat4(1.f);
+		default_shader.setUniform("transform", MVP);
 		Renderer::bind_vao(VAO);
 		Renderer::draw_buffer(VBO, 3);
 

@@ -9,7 +9,9 @@ namespace uroboro {
 		public:
 			real data[4][4] = { {0.f}, {0.f}, {0.f}, {0.f} }; //4x4
 
-			inline mat4() {}
+			inline mat4() {
+				identity();
+			}
 
 			inline mat4(real i) {
 				data[0][0] = i;

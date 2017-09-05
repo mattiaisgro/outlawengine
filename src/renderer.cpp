@@ -215,7 +215,7 @@ void outlaw::Renderer::set_shader_uniform(GPUID ID, std::string uniform, mat4 va
 	// Does not support double precision
 	// TO-DO
 	const float* data_ptr = (float*) value.data;
-	glUniformMatrix4fv(location, 1, GL_FALSE, data_ptr);
+	glUniformMatrix4fv(location, 1, GL_TRUE, data_ptr);
 }
 
 void outlaw::Renderer::reshape(uint width, uint height) {
