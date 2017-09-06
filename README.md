@@ -1,3 +1,4 @@
+<a href="url"><img src="https://github.com/mattiaisgro/outlawengine/blob/master/outlaw.png" align="left" width="48" ></a>
 # Outlaw Rendering Engine
 A C++ rendering engine using OpenGL
 
