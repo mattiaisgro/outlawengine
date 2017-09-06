@@ -1,7 +1,7 @@
 <a href="url"><img src="https://github.com/mattiaisgro/outlawengine/blob/master/outlaw.png" align="left" width="60" ></a>
 # Outlaw Rendering Engine
 
-A C++ rendering engine using OpenGL
+A C++ rendering engine using OpenGL with support for window and input handling
 
 ### How to compile
 * First of all you need GLFW binaries, you can download pre-compiled binaries or compile them by yourself.
