@@ -43,7 +43,7 @@ namespace outlaw {
 			Window() {}
 			~Window() {}
 
-			static int create(std::string title = "outlaw engine", uint width = 1200, uint height = 800);
+			static int create(std::string title = "Outlaw Rendering Engine", uint width = 1200, uint height = 800);
 
 			static void destroy();
 

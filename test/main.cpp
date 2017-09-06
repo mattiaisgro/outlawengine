@@ -4,7 +4,7 @@ using namespace outlaw;
 
 int main(int argc, char const *argv[]) {
 
-	Window::create();
+	Window::create("Outlaw Test");
 
 	// Load default shader
 	Shader default_shader("../res/default.glsl");

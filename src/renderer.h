@@ -30,6 +30,7 @@ namespace outlaw {
 			static GPUID currentVBO;
 			static GPUID currentVAO;
 			static GPUID currentShader;
+			static GPUID currentEBO;
 
 		public:
 
@@ -56,6 +57,18 @@ namespace outlaw {
 			static void destroy_buffer(GPUID ID);
 
 			static void draw_buffer(uint count, GLPRIMITIVE primitive = GLPRIMITIVE::TRIANGLES);
+
+			// EBO functions
+
+			// TO-DO Support for different types of data (GL_UNSIGNED_SHORT ...)
+			static GPUID create_ebo(uint data[], size_t size, BUFF_USAGE usage = BUFF_USAGE::STATIC);
+
+			static void bind_ebo(GPUID ID);
+
+			static void destroy_ebo(GPUID ID);
+
+			static void draw_ebo(GPUID ID, uint count, GLPRIMITIVE primitive = GLPRIMITIVE::TRIANGLES,
+								 const void* pointer = nullptr);
 
 			// Shader functions
 

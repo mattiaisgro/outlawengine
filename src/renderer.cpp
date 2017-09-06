@@ -9,6 +9,7 @@ using namespace outlaw;
 GPUID Renderer::currentVBO = 0;
 GPUID Renderer::currentVAO = 0;
 GPUID Renderer::currentShader = 0;
+GPUID Renderer::currentEBO = 0;
 
 
 void outlaw::Renderer::init() {}
@@ -92,6 +93,50 @@ void outlaw::Renderer::destroy_buffer(GPUID ID) {
 void outlaw::Renderer::draw_buffer(uint count, GLPRIMITIVE primitive) {
 
 	glDrawArrays((GLenum) primitive, 0, count);
+}
+
+// EBO functions
+
+GPUID outlaw::Renderer::create_ebo(uint data[], size_t size, BUFF_USAGE usage) {
+
+	GPUID ID;
+	glCreateBuffers(1, &ID);
+
+	if(!ID)
+		return 0;
+
+	int usage_const = 0;
+
+	if(usage == BUFF_USAGE::STATIC)
+		usage_const = GL_STATIC_DRAW;
+	else if(usage == BUFF_USAGE::DYNAMIC)
+		usage_const = GL_DYNAMIC_DRAW;
+	else if(usage == BUFF_USAGE::STREAM)
+		usage_const = GL_STREAM_DRAW;
+
+	Renderer::bind_ebo(ID);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, usage_const);
+
+	return ID;
+}
+
+void outlaw::Renderer::bind_ebo(GPUID ID) {
+
+	if(ID != currentEBO) {
+		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ID);
+		currentEBO = ID;
+	}
+}
+
+void outlaw::Renderer::destroy_ebo(GPUID ID) {
+
+	glDeleteBuffers(1, &ID);
+}
+
+void outlaw::Renderer::draw_ebo(GPUID ID, uint count, GLPRIMITIVE primitive, const void* pointer) {
+
+	Renderer::bind_ebo(ID);
+	glDrawElements((GLenum) primitive, count, GL_UNSIGNED_INT, pointer);
 }
 
 // Shader functions
