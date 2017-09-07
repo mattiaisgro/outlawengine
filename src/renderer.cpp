@@ -10,6 +10,7 @@ GPUID Renderer::currentVBO = 0;
 GPUID Renderer::currentVAO = 0;
 GPUID Renderer::currentShader = 0;
 GPUID Renderer::currentEBO = 0;
+GPUID Renderer::currentTexture[16] = {0};
 
 
 void outlaw::Renderer::init() {}
@@ -139,6 +140,52 @@ void outlaw::Renderer::draw_ebo(GPUID ID, uint count, GLPRIMITIVE primitive, con
 	glDrawElements((GLenum) primitive, count, GL_UNSIGNED_INT, pointer);
 }
 
+// Texture functions
+
+GPUID outlaw::Renderer::create_texture(float data[], size_t height, size_t width, TEXTUREFORMAT format, bool genmipmap, uint unit) {
+
+	unsigned int ID;
+	glGenTextures(1, &ID);
+
+	if(!ID)
+		return 0;
+
+	Renderer::bind_texture(ID, unit);
+
+	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+
+	if(genmipmap)
+		glGenerateMipmap(GL_TEXTURE_2D);
+
+	return ID;
+}
+
+void outlaw::Renderer::set_texture_filter(TEXTUREFILTER filter_min, TEXTUREFILTER filter_max) {
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (GLint) filter_min);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, (GLint) filter_max);
+}
+
+void outlaw::Renderer::set_texture_wrap(GLTEXTUREWRAP wrap_s, GLTEXTUREWRAP wrap_t) {
+
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_BORDER);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, (GLenum) wrap_t);
+}
+
+void outlaw::Renderer::set_texture_border_color(vec4 color) {
+
+	glTexParameterfv(GL_TEXTURE_2D, GL_TEXTURE_BORDER_COLOR, (float*) &color);
+}
+
+void outlaw::Renderer::bind_texture(GPUID ID, uint unit) {
+
+	if(currentTexture[unit] != ID) {
+		glActiveTexture(GL_TEXTURE0 + unit);
+		glBindTexture(GL_TEXTURE_2D, ID);
+		currentTexture[unit] = ID;
+	}
+}
+
 // Shader functions
 
 GPUID outlaw::Renderer::create_shader(std::string vertex_code,
@@ -225,7 +272,44 @@ GPUID outlaw::Renderer::create_shader(std::string vertex_code,
 
 GPUID outlaw::Renderer::create_shader(std::string compute_code) {
 
-	// TO-DO
+	GPUID computeID = glCreateShader(GL_COMPUTE_SHADER);
+
+	char const* compute_code_ptr = compute_code.c_str();
+	glShaderSource(computeID, 1, &compute_code_ptr, nullptr);
+	glCompileShader(computeID);
+
+	int message_lenght;
+
+	glGetShaderiv(computeID, GL_INFO_LOG_LENGTH, &message_lenght);
+	if(message_lenght) {
+		char* message = new char[message_lenght + 1];
+		message[message_lenght] = '\0';
+		glGetShaderInfoLog(computeID, message_lenght, nullptr, message);
+		printerror("SHADER: ", message);
+		delete[] message;
+	}
+
+	GPUID programID = glCreateProgram();
+	glAttachShader(programID, computeID);
+	glLinkProgram(programID);
+
+	int result;
+	glGetProgramiv(programID, GL_LINK_STATUS, &result);
+	glGetProgramiv(programID, GL_INFO_LOG_LENGTH, &message_lenght);
+	if(message_lenght) {
+		char* message = new char[message_lenght + 1];
+		message[message_lenght] = '\0';
+		glGetProgramInfoLog(programID, message_lenght, nullptr, message);
+		printerror("SHADER: ", message);
+		delete[] message;
+	}
+
+	if(message_lenght) {
+		printerror("Error while loading shader");
+		return 0;
+	}
+
+	return programID;
 }
 
 void outlaw::Renderer::bind_shader(GPUID ID) {
