@@ -126,6 +126,8 @@ namespace outlaw {
 
 			static void set_shader_uniform(GPUID ID, std::string uniform, mat4 value);
 
+			static void set_shader_uniform(GPUID ID, std::string uniform, int value);
+
 			// Window functions
 
 			static void reshape(uint width, uint height);
