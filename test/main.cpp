@@ -48,28 +48,32 @@ int main(int argc, char const *argv[]) {
 
 		if(Input::isPressed(KEY_W)) {
 
-			camera.view.translate(vec3(0, 0, 0.1f));
+			camera.view.translate(vec3(0, 0, 0.01f));
+		}
 
-		} else if(Input::isPressed(KEY_S)) {
+		if(Input::isPressed(KEY_S)) {
 
-			camera.view.translate(vec3(0, 0, -0.1f));
+			camera.view.translate(vec3(0, 0, -0.01f));
+		}
 
-		} else if(Input::isPressed(KEY_A)) {
+		if(Input::isPressed(KEY_A)) {
 
-			camera.view.translate(vec3(0.1f, 0, 0));
+			camera.view.translate(vec3(0.01f, 0, 0));
+		}
 
-		} else if(Input::isPressed(KEY_D)) {
+		if(Input::isPressed(KEY_D)) {
 
-			camera.view.translate(vec3(-0.1f, 0, 0));
+			camera.view.translate(vec3(-0.01f, 0, 0));
+		}
 
-		} else if(Input::isPressed(KEY_Z)) {
+		if(Input::isPressed(KEY_Z)) {
 
-			camera.view.translate(vec3(0, -0.1f, 0));
+			camera.view.translate(vec3(0, -0.01f, 0));
+		}
 
-		} else if(Input::isPressed(KEY_X)) {
+		if(Input::isPressed(KEY_X)) {
 
-			camera.view.translate(vec3(0, 0.1f, 0));
-
+			camera.view.translate(vec3(0, 0.01f, 0));
 		}
 
 

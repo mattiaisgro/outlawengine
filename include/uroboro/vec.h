@@ -26,7 +26,7 @@ namespace uroboro {
 				z *= scalar;
 			}
 
-			inline void operator=(vec4 &other) {
+			inline void operator=(vec4 const& other) {
 				x = other.x;
 				y = other.y;
 				z = other.z;
@@ -124,7 +124,7 @@ namespace uroboro {
 				z *= scalar;
 			}
 
-			inline void operator=(vec3 &other) {
+			inline void operator=(vec3 const& other) {
 				x = other.x;
 				y = other.y;
 				z = other.z;

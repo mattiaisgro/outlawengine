@@ -205,6 +205,46 @@ namespace uroboro {
 
 	};
 
+
+	inline mat4 perspective(float left, float right, float bottom, float top, float near, float far) {
+
+		mat4 result = mat4();
+
+		result.data[0][0]  = 2 * near / (right - left);
+		result.data[0][2]  = (right + left) / (right - left);
+		result.data[1][1]  = 2 * near / (top - bottom);
+		result.data[1][2]  = (top + bottom) / (top - bottom);
+		result.data[2][2] = -(far + near) / (far - near);
+		result.data[2][3] = -(2 * far * near) / (far - near);
+		result.data[3][2] = -1;
+		result.data[3][3] = 0;
+
+		return result;
+	}
+
+
+	inline mat4 perspective(real fov, real aspect, real near, real far) {
+
+		real height = near * tan(radians(fov / 2.f));
+		real width = height * aspect;
+
+		return perspective(-width, width, -height, height, near, far);
+	}
+
+	inline mat4 ortho(real left, real right, real bottom, real top, real near, real far) {
+
+		mat4 result = mat4();
+
+		result.data[0][0]  = 2 / (right - left);
+		result.data[0][3]  = -(right + left) / (right - left);
+		result.data[1][1]  = 2 / (top - bottom);
+		result.data[1][3]  = -(top + bottom) / (top - bottom);
+		result.data[2][2] = -2 / (far - near);
+		result.data[2][3] = -(far + near) / (far - near);
+
+		return result;
+	}
+
 }
 
 #endif

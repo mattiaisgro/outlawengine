@@ -291,7 +291,7 @@ namespace uroboro {
 
 
 	// Fast implementation of memzero using 64-bit integers
-	inline void fastmemzero(char* buffer, unsigned int size) {
+	inline void fastmemzero(char* buffer, size_t size) {
 
 		for (int i = 0; i < int(size / 8.f); ++i) {
 			((int64_t*) buffer)[i] = 0;
@@ -304,7 +304,7 @@ namespace uroboro {
 
 
 	// Fast implementation of memcpy using 64-bit integers
-	inline void fastmemcpy(char* dest, char* src, unsigned int size) {
+	inline void fastmemcpy(char* dest, char* src, size_t size) {
 
 		for (int i = 0; i < int(size / 8.f); ++i) {
 			((int64_t*) dest)[i] = ((int64_t*) src)[i];
