@@ -1,3 +1,5 @@
+include config.mk
+
 static: bin/lib${LIBNAME}.a
 shared: lib/lib${LIBNAME}.so
 
