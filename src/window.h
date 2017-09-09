@@ -102,6 +102,8 @@ namespace outlaw {
 
 			static void getRatio(int* number, int* denom);
 
+			static float getAspectRatio();
+
 			static void getPosition(int* x, int* y);
 
 			static uint getSamples();

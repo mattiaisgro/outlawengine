@@ -16,14 +16,15 @@ namespace outlaw {
 				// view = uroboro::lookAt(position, target, up);
 			}
 
-			// TO-DO
-			// inline void perspective() {
-			// projection = uroboro::perspective();
-			// }
+			inline void perspective(float fov, float aspect, float near = 0.1f, float far = 100.f) {
 
-			// inline void ortho() {
-			// projection = uroboro::ortho();
-			// }
+				projection = uroboro::perspective(fov, aspect, near, far);
+			}
+
+			inline void ortho(float left, float right, float bottom, float top, float near, float far) {
+
+				projection = uroboro::ortho(left, right, bottom, top, near, far);
+			}
 
 	};
 

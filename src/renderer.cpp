@@ -142,7 +142,7 @@ void outlaw::Renderer::draw_ebo(GPUID ID, uint count, GLPRIMITIVE primitive, con
 
 // Texture functions
 
-GPUID outlaw::Renderer::create_texture(float data[], size_t height, size_t width, TEXTUREFORMAT format, bool genmipmap, uint unit) {
+GPUID outlaw::Renderer::create_texture(float data[], size_t height, size_t width, GLTEXTUREFORMAT format, bool genmipmap, uint unit) {
 
 	unsigned int ID;
 	glGenTextures(1, &ID);
@@ -160,7 +160,7 @@ GPUID outlaw::Renderer::create_texture(float data[], size_t height, size_t width
 	return ID;
 }
 
-void outlaw::Renderer::set_texture_filter(TEXTUREFILTER filter_min, TEXTUREFILTER filter_max) {
+void outlaw::Renderer::set_texture_filter(GLTEXTUREFILTER filter_min, GLTEXTUREFILTER filter_max) {
 
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, (GLint) filter_min);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, (GLint) filter_max);

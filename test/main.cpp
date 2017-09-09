@@ -35,6 +35,7 @@ int main(int argc, char const *argv[]) {
 
 	// Create default camera
 	Camera camera = Camera();
+	camera.perspective(90, Window::getAspectRatio(), 0.1f, 100);
 
 	// Game loop (rudimental)
 	while(!Window::getShouldClose()) {

@@ -54,6 +54,10 @@ int outlaw::Window::create(std::string title, uint width, uint height) {
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
 
+#ifdef DEBUG
+	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
+#endif
+
 	mode = next.mode;
 	switch((int) mode) {
 		case (int) WindowMode::WINDOW_WINDOWED: ID = (void*) glfwCreateWindow(width, height, title.c_str(), NULL, NULL);
@@ -241,6 +245,10 @@ bool outlaw::Window::getShouldClose() {
 
 void outlaw::Window::getRatio(int* number, int* denom) {
 	//TO-DO
+}
+
+float outlaw::Window::getAspectRatio() {
+	return Window::getWidth() / float(Window::getHeight());
 }
 
 void outlaw::Window::getPosition(int* x, int* y) {

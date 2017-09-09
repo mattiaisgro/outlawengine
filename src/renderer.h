@@ -28,14 +28,14 @@ namespace outlaw {
 		CLAMP_TO_BORDER = 0x812D
 	};
 
-	enum class TEXTUREFORMAT {
+	enum class GLTEXTUREFORMAT {
 		RGB = 0x1907,
 		RGBA = 0x1908,
 		BGR = 0x80E0,
 		BGRA = 0x80E1
 	};
 
-	enum class TEXTUREFILTER {
+	enum class GLTEXTUREFILTER {
 		NEAREST = 0x2600,
 		LINEAR = 0x2601,
 		NEAREST_MIPMAP_NEAREST = 0x2700,
@@ -97,10 +97,10 @@ namespace outlaw {
 			// Texture functions
 
 			static GPUID create_texture(float data[], size_t height, size_t width,
-										TEXTUREFORMAT format = TEXTUREFORMAT::RGB, bool genmipmap = false,
+										GLTEXTUREFORMAT format = GLTEXTUREFORMAT::RGB, bool genmipmap = false,
 										uint unit = 0);
 
-			static void set_texture_filter(TEXTUREFILTER filter_min, TEXTUREFILTER filter_max);
+			static void set_texture_filter(GLTEXTUREFILTER filter_min, GLTEXTUREFILTER filter_max);
 
 			static void set_texture_wrap(GLTEXTUREWRAP wrap_s, GLTEXTUREWRAP wrap_t);
 
