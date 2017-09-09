@@ -38,6 +38,7 @@ void_func_ptr GL::glGetProcAddress(const char *name) {
 
 #include <dlfcn.h>
 #include <GL/glx.h>
+#include <string.h>
 
 static void* lib;
 static PFNGLXGETPROCADDRESSPROC glXGetProcAddress_;
