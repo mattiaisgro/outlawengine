@@ -1,18 +1,17 @@
-		
-static: bin/lib${LIBNAME}.a
-shared: lib/lib${LIBNAME}.so
+include config.mk
 
-lib/lib${LIBNAME}.a: ${OBJECTS}
+static: bin/lib${LIBNAME}.a
+shared: bin/lib${LIBNAME}.so
+
+bin/lib${LIBNAME}.a: ${OBJECTS}
 	@echo + Linking... [static]
 	@ar rs $@ $^
 
-lib/lib${LIBNAME}.so: ${OBJECTS}
+bin/lib${LIBNAME}.so: ${OBJECTS}
 	@echo + Linking... [shared]
 	@${CC} -shared $^ -o $@
 
-${OBJECTS}: all
-
-all: ${SOURCES}
+${OBJECTS}: ${SOURCES}
 	@echo + Compiling...
 	@${CC} -c src/*.cpp ${CXXFLAGS}
 
@@ -27,3 +26,6 @@ test: static shared
 copy:
 	@cp lib/linux/libglfw3.so test/glw3.so
 	@cp bin/lib${LIBNAME}.so test/lib${LIBNAME}.so
+
+all: static shared clean test copy
+	@echo Ok.

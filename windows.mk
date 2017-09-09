@@ -1,17 +1,15 @@
 include config.mk
 
 static: bin/lib${LIBNAME}.a
-shared: lib/lib${LIBNAME}.so
+shared: bin/lib${LIBNAME}.so
 
-lib/lib${LIBNAME}.a: ${OBJECTS}
+bin/lib${LIBNAME}.a: ${OBJECTS}
 	@echo + Linking... [static]
 	@ar rs $@ $^
 
-lib/lib${LIBNAME}.so: ${OBJECTS}
+bin/lib${LIBNAME}.so: ${OBJECTS}
 	@echo + Linking... [shared]
 	@${CC} -shared $^ -o $@
-
-${OBJECTS}: all
 
 all: ${SOURCES}
 	@echo + Compiling...
@@ -28,3 +26,6 @@ test: static shared
 copy:
 	@cp lib/win32/libglfw3.so test/glw3.so
 	@cp bin/lib${LIBNAME}.so test/lib${LIBNAME}.so
+
+all: static shared clean test copy
+	@echo Ok.
