@@ -39,9 +39,10 @@ namespace outlaw {
 
 			static WindowNext next;
 
+			Window() = delete;
+			~Window() = delete;
+
 		public:
-			Window() {}
-			~Window() {}
 
 			static int create(std::string title = "Outlaw Rendering Engine", uint width = 1200, uint height = 800);
 

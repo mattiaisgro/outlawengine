@@ -28,7 +28,7 @@ namespace GL {
 	/*
 	*Loads OpenGL functions into function pointers.
 	*/
-	int load();
+	int loadgl();
 
 	extern PFNGLACTIVESHADERPROGRAMPROC gl_ActiveShaderProgram;
 	extern PFNGLACTIVETEXTUREPROC gl_ActiveTexture;

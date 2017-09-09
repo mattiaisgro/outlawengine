@@ -87,7 +87,7 @@ int outlaw::Window::create(std::string title, uint width, uint height) {
 
 	initialized = true;
 
-	if(GL::load()) {
+	if(GL::loadgl()) {
 		printerror("Unable to load OpenGL");
 		glfwTerminate();
 		exit(-2);

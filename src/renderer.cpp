@@ -42,8 +42,10 @@ void outlaw::Renderer::setup_vao(VAOAttrib attributes[], uint count) {
 
 void outlaw::Renderer::bind_vao(GPUID ID) {
 
-	if(currentVAO != ID)
+	if(currentVAO != ID) {
 		glBindVertexArray(ID);
+		currentVAO = ID;
+	}
 }
 
 void outlaw::Renderer::destroy_vao(GPUID ID) {
