@@ -6,12 +6,13 @@ A C++ rendering engine using OpenGL with support for window and input handling
 ### How to compile
 * First of all you need GLFW binaries, you can download pre-compiled binaries or compile them by yourself.
 All instructions on how to compile GLFW are [here](http://glfw.org)
-* When you have the binaries, place them in a `lib` folder in the root of the repo
-* NOTE: On Windows, when using MinGW, you will have to rename the DLL to `libglfw3.so`
-* Create a `bin` folder
-* If you use GCC or MinGW, you can compile using `compile.sh` or `compile.bat` based on your system.
-* Place the shared library in the bin folder
-* You can now run the test program
+* When you have the binaries, place them in `outlawengine/lib/win32` or `outlawengine/lib/linux` folder in the root of the repo (depending on your system)
+* Run `compile.bat` or `compile.sh` or the Makefiles
+
+You can run the Makefile using the command
+`make -f linux.mk all`
+or
+`make -f windows.mk all`
 
 ### Dependencies
 * Uroboro
