@@ -87,8 +87,8 @@ int GL::loadgl() {
 
 	load_funcs();
 
-	glGetIntegerv(GL_MAJOR_VERSION, &version.major);
-	glGetIntegerv(GL_MINOR_VERSION, &version.minor);
+	glGetIntegerv(GL_MAJOR_VERSION, &glversion.major);
+	glGetIntegerv(GL_MINOR_VERSION, &glversion.minor);
 
 	free_lib();
 	return 0;

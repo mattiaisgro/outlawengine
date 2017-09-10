@@ -1,5 +1,4 @@
 #include "window.h"
-#include "loadgl.h"
 #include "GLFW/glfw3.h"
 #include "core.h"
 #include <cstdlib>
@@ -52,7 +51,7 @@ int outlaw::Window::create(std::string title, uint width, uint height) {
 	glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GLFW_TRUE);
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 4);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 0);
 
 #ifdef DEBUG
 	glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GL_TRUE);
@@ -87,11 +86,7 @@ int outlaw::Window::create(std::string title, uint width, uint height) {
 
 	initialized = true;
 
-	if(GL::loadgl()) {
-		printerror("Unable to load OpenGL");
-		glfwTerminate();
-		exit(-2);
-	}
+	Renderer::init();
 
 	Input::create();
 
@@ -208,8 +203,8 @@ void outlaw::Window::setClipboard(std::string s) {
 //Getters
 
 int outlaw::Window::getWidth() {
-	int width = width;
-	int height = height;
+	int width = 0;
+	int height = 0;
 	if(initialized) {
 		glfwGetWindowSize(WINDOWID, &width, &height);
 		Window::height = height;
@@ -219,11 +214,13 @@ int outlaw::Window::getWidth() {
 }
 
 int outlaw::Window::getHeight() {
-	int width;
-	int height;
-	glfwGetWindowSize(WINDOWID, &width, &height);
-	Window::height = height;
-	Window::width = width;
+	int width = 0;
+	int height = 0;
+	if(initialized) {
+		glfwGetWindowSize(WINDOWID, &width, &height);
+		Window::height = height;
+		Window::width = width;
+	}
 	return height;
 }
 

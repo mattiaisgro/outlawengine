@@ -13,7 +13,7 @@ namespace GL {
 
 	static struct {
 		int major, minor;
-	} version;
+	} glversion;
 
 	/*
 	*Returns a function pointer to the requested OpenGL function.

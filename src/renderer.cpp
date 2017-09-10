@@ -13,7 +13,17 @@ GPUID Renderer::currentEBO = 0;
 GPUID Renderer::currentTexture[16] = {0};
 
 
-void outlaw::Renderer::init() {}
+void outlaw::Renderer::init() {
+
+	int res = GL::loadgl();
+
+	if(res || GL::glversion.major < 4) {
+		printerror("Unable to load OpenGL");
+		Window::destroy();
+		exit(-2);
+	}
+
+}
 
 // VAO functions
 
@@ -28,7 +38,7 @@ GPUID outlaw::Renderer::create_vao() {
 
 void outlaw::Renderer::setup_vao(VAOAttrib attributes[], uint count) {
 
-	for (int i = 0; i < count; ++i) {
+	for (uint i = 0; i < count; ++i) {
 		const void* ptr = attributes[i].pointer;
 		glVertexAttribPointer(i,
 								attributes[i].size,

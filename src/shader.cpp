@@ -29,17 +29,15 @@ void outlaw::Shader::load(std::string filename) {
 	std::string compute_code = "";
 	std::string* current = &vertex_code;
 
-	bool geometry = false;
 	bool compute = false;
 
-	for (int i = 0; i < lines.size(); ++i) {
+	for (unsigned int i = 0; i < lines.size(); ++i) {
 		if(lines[i] == "#vertex")
 			current = &vertex_code;
 		else if(lines[i] == "#fragment")
 			current = &fragment_code;
 		else if(lines[i] == "#geometry") {
 			current = &geometry_code;
-			geometry = true;
 		} else if(lines[i] == "#compute") {
 			current = &compute_code;
 			compute = true;
