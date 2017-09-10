@@ -1,5 +1,7 @@
 include config.mk
 
+LIBRARIES = -L./lib/win32/ -lopengl32 -lgdi32 -lglfw3
+
 static: bin/lib${LIBNAME}.a
 shared: bin/lib${LIBNAME}.so
 
@@ -9,7 +11,7 @@ bin/lib${LIBNAME}.a: ${OBJECTS}
 
 bin/lib${LIBNAME}.so: ${OBJECTS}
 	@echo + Linking... [shared]
-	@${CC} -shared $^ -o $@
+	@${CC} -shared $^ ${LIBRARIES} -o $@
 
 ${OBJECTS}: ${SOURCES}
 	@echo + Compiling...
@@ -21,11 +23,11 @@ clean:
 
 test: static shared
 	@echo + Compiling tests...
-	@${CC} test/main.cpp ${TESTFLAGS} ${LIBRARIES} -o test/main.exe
+	@${CC} test/main.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/main.exe
 
 copy:
-	@cp lib/win32/libglfw3.so test/glw3.so
-	@cp bin/lib${LIBNAME}.so test/lib${LIBNAME}.so
+	@cp lib/win32/libglfw3.so test/glfw3.dll
+	@cp bin/lib${LIBNAME}.so test/${LIBNAME}.dll
 
 all: static shared clean test copy
 	@echo Ok.
