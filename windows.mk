@@ -11,7 +11,7 @@ bin/lib${LIBNAME}.so: ${OBJECTS}
 	@echo + Linking... [shared]
 	@${CC} -shared $^ -o $@
 
-all: ${SOURCES}
+${OBJECTS}: ${SOURCES}
 	@echo + Compiling...
 	@${CC} -c src/*.cpp ${CXXFLAGS}
 
