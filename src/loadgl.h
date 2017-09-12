@@ -1,10 +1,20 @@
 #ifndef _LOADGL_H
 #define _LOADGL_H
-#include "GL/glcorearb.h"
+
+#ifndef LOADGL_HEADER
+#define LOADGL_HEADER "GL/glcorearb.h"
+#endif
+
+#include LOADGL_HEADER
+
 #ifndef __gl_h_
 #define __gl_h_
 #endif
-#include <vector>
+
+#ifndef LOADGL_MINIMAL
+#include <string>
+#include <map>
+#endif
 
 
 namespace GL {
@@ -15,20 +25,31 @@ namespace GL {
 		int major, minor;
 	} glversion;
 
+#ifndef LOADGL_MINIMAL
+static std::map<std::string, bool> glextensions;
+#endif
+
 	/*
-	*Returns a function pointer to the requested OpenGL function.
+	* Returns a function pointer to the requested OpenGL function.
 	*/
 	void_func_ptr glGetProcAddress(const char* name);
 
 	/*
-	*Checks wether the asked extension is supported.
+	* Checks wether the asked extension is supported.
 	*/
 	bool glIsSupported(const char* extension);
 
 	/*
-	*Loads OpenGL functions into function pointers.
+	* Loads OpenGL functions into function pointers.
 	*/
 	int loadgl();
+
+	/*
+	* Loads the list of available extensions for later use
+	* NOTE: This function does not directly load all extension
+	* it just makes it faster to check which extensions are available
+	*/
+	int loadglext();
 
 	extern PFNGLACTIVESHADERPROGRAMPROC gl_ActiveShaderProgram;
 	extern PFNGLACTIVETEXTUREPROC gl_ActiveTexture;

@@ -16,8 +16,9 @@ GPUID Renderer::currentTexture[16] = {0};
 void outlaw::Renderer::init() {
 
 	int res = GL::loadgl();
+	res |= GL::loadglext();
 
-	if(res || GL::glversion.major < 4) {
+	if(res) {
 		printerror("Unable to load OpenGL");
 		Window::destroy();
 		exit(-2);

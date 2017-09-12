@@ -8,13 +8,16 @@ using namespace outlaw;
 int main(int argc, char const *argv[]) {
 
 	Window::create("Outlaw Test");
+	printlog("Opened window");
 
 	// Load default shader
 	Shader default_shader("../res/default.glsl");
 	default_shader.bind();
+	printlog("Loaded default shader");
 
 	// Create VAO and set it up
 	GPUID VAO = Renderer::create_vao();
+	printlog("Created default VAO");
 
 
 	// Prepare buffer of data
@@ -26,6 +29,7 @@ int main(int argc, char const *argv[]) {
 	};
 
 	GPUID VBO = Renderer::create_buffer((float*) vertices, sizeof(vertices));
+	printlog("Created VBO");
 
 	VAOAttrib attributes[] = {
 		VAOAttrib() // Default attribute for vertex data
@@ -36,7 +40,9 @@ int main(int argc, char const *argv[]) {
 	// Create default camera
 	Camera camera = Camera();
 	camera.perspective(90, Window::getAspectRatio(), 0.1f, 100);
+	printlog("Created camera");
 
+	printlog("Entering game loop");
 	// Game loop (rudimental)
 	while(!Window::getShouldClose()) {
 
