@@ -1,5 +1,7 @@
 include config.mk
 
+default_target: all
+
 static: bin/lib${LIBNAME}.a
 shared: bin/lib${LIBNAME}.so
 
@@ -29,3 +31,11 @@ copy:
 
 all: static shared clean test copy
 	@echo Ok.
+
+help:
+	@echo "The following are some of the valid targets for this Makefile:"
+	@echo "... all (the default if no target is provided)"
+	@echo "... clean"
+	@echo "... test"
+	@echo "... copy"
+

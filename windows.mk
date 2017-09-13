@@ -1,5 +1,7 @@
 include config.mk
 
+default_target: all
+
 LIBRARIES = -L./lib/win32/ -lopengl32 -lgdi32 -lglfw3
 
 static: bin/lib${LIBNAME}.a
@@ -31,3 +33,10 @@ copy:
 
 all: static shared clean test copy
 	@echo Ok.
+
+help:
+	@echo "The following are some of the valid targets for this Makefile:"
+	@echo "... all (the default if no target is provided)"
+	@echo "... clean"
+	@echo "... test"
+	@echo "... copy"
