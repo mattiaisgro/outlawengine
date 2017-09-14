@@ -1,0 +1,8 @@
+version: 2
+jobs:
+   build:
+     docker:
+       - image: circleci/C++:v0.1
+     steps:
+       - checkout
+       - run: mk -f linux.mk

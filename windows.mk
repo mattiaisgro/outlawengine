@@ -19,6 +19,9 @@ ${OBJECTS}: ${SOURCES}
 	@echo + Compiling...
 	@${CC} -c src/*.cpp ${CXXFLAGS}
 
+rename:
+	@cp lib/win32/glfw3.dll lib/win32/libglfw3.so
+
 clean:
 	@echo + Cleaning...
 	@rm *.o
@@ -31,7 +34,7 @@ copy:
 	@cp lib/win32/libglfw3.so test/glfw3.dll
 	@cp bin/lib${LIBNAME}.so test/${LIBNAME}.dll
 
-all: static shared clean test copy
+all: rename static shared clean test copy
 	@echo Ok.
 
 help:
