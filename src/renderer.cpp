@@ -11,6 +11,7 @@ GPUID Renderer::currentVAO = 0;
 GPUID Renderer::currentShader = 0;
 GPUID Renderer::currentEBO = 0;
 GPUID Renderer::currentTexture[16] = {0};
+GPUID Renderer::currentFramebuffer = 0;
 
 
 void outlaw::Renderer::init() {
@@ -364,6 +365,32 @@ void outlaw::Renderer::set_shader_uniform(GPUID ID, std::string uniform, int val
 	unsigned int location = glGetUniformLocation(ID, uniform.c_str());
 	glUniform1i(location, value);
 }
+
+// Framebuffer functions
+
+GPUID Renderer::create_framebuffer() {
+
+	unsigned int ID;
+	glGenFramebuffers(1, &ID);
+
+	return ID;
+}
+
+void Renderer::bind_framebuffer(GPUID ID, GLFRAMEBUFFERACCESS access) {
+
+	if(currentFramebuffer != ID) {
+		glBindFramebuffer((GLenum) access, ID);
+		currentFramebuffer = ID;
+	}
+}
+
+void Renderer::read_pixels(GPUID ID, vec2 position, float* data) {
+
+
+}
+
+
+// Window functions
 
 void outlaw::Renderer::reshape(uint width, uint height) {
 	glViewport(0, 0, width, height);

@@ -1,5 +1,7 @@
 #include "loadgl.h"
-#include <string>
+
+#include "string.h"
+#include "stdlib.h"
 
 using namespace GL;
 

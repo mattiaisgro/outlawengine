@@ -44,6 +44,12 @@ namespace outlaw {
 		LINEAR_MIPMAP_LINEAR = 0x2703
 	};
 
+	enum class GLFRAMEBUFFERACCESS {
+		ALL = 0x8D40,
+		READ = 0x8CA8,
+		DRAW = 0x8CA9
+	};
+
 	class Renderer {
 		private:
 			Renderer() = delete;
@@ -55,6 +61,7 @@ namespace outlaw {
 			static GPUID currentShader;
 			static GPUID currentEBO;
 			static GPUID currentTexture[16];
+			static GPUID currentFramebuffer;
 
 		public:
 
@@ -128,11 +135,20 @@ namespace outlaw {
 
 			static void set_shader_uniform(GPUID ID, std::string uniform, int value);
 
+			// Framebuffer functions
+
+			static GPUID create_framebuffer();
+
+			static void bind_framebuffer(GPUID ID, GLFRAMEBUFFERACCESS access = GLFRAMEBUFFERACCESS::ALL);
+
+			static void read_pixels(GPUID ID, vec2 position, float* data);
+
 			// Window functions
 
 			static void reshape(uint width, uint height);
 
 			static void clear_screen(vec3 color = vec3(0, 0, 0));
+
 
 	};
 
