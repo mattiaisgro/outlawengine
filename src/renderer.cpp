@@ -25,6 +25,19 @@ void outlaw::Renderer::init() {
 		exit(-2);
 	}
 
+	int major, minor;
+
+	glGetIntegerv(GL_MAJOR_VERSION, &major);
+	glGetIntegerv(GL_MINOR_VERSION, &minor);
+
+	printlog("OpenGL version is ", major, ".", minor);
+
+	if(major < 4) {
+		printerror("OpenGL version is too low");
+		Window::destroy();
+		exit(-3);
+	}
+
 }
 
 // VAO functions
@@ -384,9 +397,9 @@ void Renderer::bind_framebuffer(GPUID ID, GLFRAMEBUFFERACCESS access) {
 	}
 }
 
-void Renderer::read_pixels(GPUID ID, vec2 position, float* data) {
-
-
+void Renderer::read_pixels(GPUID ID, float x, float y, float width, float height, float* data) {
+	bind_framebuffer(ID);
+	glReadPixels(x, y, width, height, GL_RGB, GL_FRAMEBUFFER, (void*) data);
 }
 
 

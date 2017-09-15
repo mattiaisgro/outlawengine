@@ -1,6 +1,5 @@
 #include "input.h"
 #include "window.h"
-#include "loadgl.h"
 #include "GLFW/glfw3.h"
 
 using namespace outlaw;

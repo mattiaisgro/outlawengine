@@ -2,14 +2,19 @@
 #define OUTLAW_CAMERA_H
 #include "types.h"
 
+/*
+* This file contains a simple implementation
+* of a camera, intended for simple use or debugging
+*/
+
 namespace outlaw {
 
-	class Camera {
+	class BasicCamera {
 		public:
 			mat4 view;
 			mat4 projection;
 
-			inline Camera(mat4 view = mat4(), mat4 projection = mat4())
+			inline BasicCamera(mat4 view = mat4(), mat4 projection = mat4())
 							: view(view), projection(projection) {}
 
 			inline void lookAt(vec3 position, vec3 target, vec3 up) {

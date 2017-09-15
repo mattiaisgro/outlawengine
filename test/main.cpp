@@ -38,7 +38,7 @@ int main(int argc, char const *argv[]) {
 	Renderer::setup_vao(attributes, sizeof(attributes) / sizeof(VAOAttrib));
 
 	// Create default camera
-	Camera camera = Camera();
+	BasicCamera camera = BasicCamera();
 	camera.perspective(90, Window::getAspectRatio(), 0.1f, 100);
 	printlog("Created camera");
 

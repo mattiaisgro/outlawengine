@@ -5,6 +5,7 @@
 
 using namespace GL;
 
+
 #ifdef WIN32
 
 #define WIN32_LEAN_AND_MEAN 1
@@ -92,9 +93,6 @@ int GL::loadgl() {
 	if(load_lib()) return -1;
 
 	load_funcs();
-
-	glGetIntegerv(GL_MAJOR_VERSION, &glversion.major);
-	glGetIntegerv(GL_MINOR_VERSION, &glversion.minor);
 
 	free_lib();
 	return 0;

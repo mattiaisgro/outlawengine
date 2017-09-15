@@ -141,7 +141,7 @@ namespace outlaw {
 
 			static void bind_framebuffer(GPUID ID, GLFRAMEBUFFERACCESS access = GLFRAMEBUFFERACCESS::ALL);
 
-			static void read_pixels(GPUID ID, vec2 position, float* data);
+			static void read_pixels(GPUID ID, float x, float y, float width, float height, float* data);
 
 			// Window functions
 

@@ -21,12 +21,8 @@ namespace GL {
 
 	typedef void(*void_func_ptr)();
 
-	static struct {
-		int major, minor;
-	} glversion;
-
 #ifndef LOADGL_MINIMAL
-static std::map<std::string, bool> glextensions;
+	static std::map<std::string, bool> glextensions;
 #endif
 
 	/*
