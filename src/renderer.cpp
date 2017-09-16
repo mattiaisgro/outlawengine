@@ -427,3 +427,34 @@ void outlaw::Renderer::clear_screen(vec3 color) {
 	glClearColor(color.x, color.y, color.z, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 }
+
+// State functions
+
+void outlaw::Renderer::set_depth_test(bool b) {
+
+	if(b)
+		glEnable(GL_DEPTH_TEST);
+	else
+		glDisable(GL_DEPTH_TEST);
+}
+
+void outlaw::Renderer::set_culling(bool b) {
+
+	if(b)
+		glEnable(GL_CULL_FACE);
+	else
+		glDisable(GL_CULL_FACE);
+}
+
+void set_culling_face(GLFACE face) {
+
+	glCullFace((GLenum) face);
+}
+
+void set_culling_front_face(bool clockwise) {
+
+	if(clockwise)
+		glFrontFace(GL_CW);
+	else
+		glFrontFace(GL_CCW);
+}

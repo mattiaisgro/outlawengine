@@ -49,6 +49,12 @@ namespace outlaw {
 		LINEAR_MIPMAP_LINEAR = 0x2703
 	};
 
+	enum class GLFACE {
+		GL_BACK = 0x0405,
+		GL_FRONT = 0x0404,
+		GL_FRONT_AND_BACK = 0x0408
+	}
+
 	enum class GLFRAMEBUFFERACCESS {
 		ALL = 0x8D40,
 		READ = 0x8CA8,
@@ -78,13 +84,18 @@ namespace outlaw {
 
 			static void setup_vao(VAOAttrib attributes[], uint count);
 
-			//TO-DO VAO attributes
+			//VAO attributes
 
 			static void bind_vao(GPUID ID);
 
 			static void destroy_vao(GPUID ID);
 
 			// VBO functions
+
+			// TO-DO
+			// static void create_mesh_buffer(std::vector<vec3>& vertices,
+			// 								std::vector<vec3>& normals,
+			// 								std::vector<vec2>& UVs);
 
 			static GPUID create_buffer(float data[], size_t size, GLBUFFUSAGE usage = GLBUFFUSAGE::STATIC);
 
@@ -161,6 +172,16 @@ namespace outlaw {
 			static void reshape(uint width, uint height);
 
 			static void clear_screen(vec3 color = vec3(0, 0, 0));
+
+			// State functions
+
+			static void set_depth_test(bool b);
+
+			static void set_culling(bool b);
+
+			static void set_culling_face(GLFACE face = GLFACE::FRONT);
+
+			static void set_culling_front_face(bool clockwise = false);
 
 
 	};
