@@ -10,7 +10,7 @@ int main(int argc, char const *argv[]) {
 	Shader default_shader("../res/default.glsl");
 	default_shader.bind();
 
-	//INIT CODE
+	//Init
 
 
 

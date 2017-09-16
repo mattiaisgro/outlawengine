@@ -80,7 +80,7 @@ void outlaw::Renderer::destroy_vao(GPUID ID) {
 
 // VBO functions
 
-GPUID outlaw::Renderer::create_buffer(float data[], size_t size, BUFF_USAGE usage) {
+GPUID outlaw::Renderer::create_buffer(float data[], size_t size, GLBUFFUSAGE usage) {
 
 	unsigned int VBO;
 	glGenBuffers(1, &VBO);
@@ -90,17 +90,7 @@ GPUID outlaw::Renderer::create_buffer(float data[], size_t size, BUFF_USAGE usag
 
 	Renderer::bind_buffer(VBO);
 
-	int usage_const = 0;
-
-	if(usage == BUFF_USAGE::STATIC)
-		usage_const = GL_STATIC_DRAW;
-	else if(usage == BUFF_USAGE::DYNAMIC)
-		usage_const = GL_DYNAMIC_DRAW;
-	else if(usage == BUFF_USAGE::STREAM)
-		usage_const = GL_STREAM_DRAW;
-
-
-	glBufferData(GL_ARRAY_BUFFER, size, data, usage_const);
+	glBufferData(GL_ARRAY_BUFFER, size, data, (GLenum) usage);
 
 	return VBO;
 }
@@ -123,9 +113,42 @@ void outlaw::Renderer::draw_buffer(uint count, GLPRIMITIVE primitive) {
 	glDrawArrays((GLenum) primitive, 0, count);
 }
 
+void outlaw::Renderer::copy_buffer(GPUID dest, GPUID src, uint size) {
+
+	glBindBuffer(GL_COPY_READ_BUFFER, src);
+	glBindBuffer(GL_COPY_WRITE_BUFFER, dest);
+	glCopyBufferSubData(GL_COPY_READ_BUFFER, GL_COPY_WRITE_BUFFER, 0, 0, size);
+}
+
+void outlaw::Renderer::update_buffer(GPUID ID, GLBUFFTARGET target, uint offset, uint size, void* data) {
+
+	if(target == GLBUFFTARGET::VBO)
+		Renderer::bind_buffer(ID);
+	else if(target == GLBUFFTARGET::EBO)
+		Renderer::bind_ebo(ID);
+
+	glBufferSubData((GLenum) target, offset, size, data);
+}
+
+void* outlaw::Renderer::map_buffer(GPUID ID, GLBUFFTARGET target) {
+
+	if(target == GLBUFFTARGET::VBO)
+		Renderer::bind_buffer(ID);
+	else if(target == GLBUFFTARGET::EBO)
+		Renderer::bind_ebo(ID);
+
+	void* ptr = glMapBuffer((GLenum) target, GL_WRITE_ONLY);
+	return ptr;
+}
+
+bool outlaw::Renderer::unmap_buffer(GLBUFFTARGET target) {
+
+	return glUnmapBuffer((GLenum) target);
+}
+
 // EBO functions
 
-GPUID outlaw::Renderer::create_ebo(uint data[], size_t size, BUFF_USAGE usage) {
+GPUID outlaw::Renderer::create_ebo(uint data[], size_t size, GLBUFFUSAGE usage) {
 
 	GPUID ID;
 	glCreateBuffers(1, &ID);
@@ -133,17 +156,8 @@ GPUID outlaw::Renderer::create_ebo(uint data[], size_t size, BUFF_USAGE usage) {
 	if(!ID)
 		return 0;
 
-	int usage_const = 0;
-
-	if(usage == BUFF_USAGE::STATIC)
-		usage_const = GL_STATIC_DRAW;
-	else if(usage == BUFF_USAGE::DYNAMIC)
-		usage_const = GL_DYNAMIC_DRAW;
-	else if(usage == BUFF_USAGE::STREAM)
-		usage_const = GL_STREAM_DRAW;
-
 	Renderer::bind_ebo(ID);
-	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, usage_const);
+	glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, data, (GLenum) usage);
 
 	return ID;
 }

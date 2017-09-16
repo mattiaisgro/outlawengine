@@ -5,10 +5,15 @@
 
 namespace outlaw {
 
-	enum class BUFF_USAGE {
-		STATIC,
-		DYNAMIC,
-		STREAM
+	enum class GLBUFFUSAGE {
+		STATIC = 0x88E4,
+		DYNAMIC = 0x88E8,
+		STREAM = 0x88E0
+	};
+
+	enum class GLBUFFTARGET {
+		VBO = 0x8892,
+		EBO = 0x8893
 	};
 
 	enum class GLPRIMITIVE {
@@ -81,7 +86,7 @@ namespace outlaw {
 
 			// VBO functions
 
-			static GPUID create_buffer(float data[], size_t size, BUFF_USAGE usage = BUFF_USAGE::STATIC);
+			static GPUID create_buffer(float data[], size_t size, GLBUFFUSAGE usage = GLBUFFUSAGE::STATIC);
 
 			static void bind_buffer(GPUID ID);
 
@@ -89,10 +94,18 @@ namespace outlaw {
 
 			static void draw_buffer(uint count, GLPRIMITIVE primitive = GLPRIMITIVE::TRIANGLES);
 
+			static void copy_buffer(GPUID dest, GPUID src, uint size);
+
+			static void update_buffer(GPUID ID, GLBUFFTARGET target, uint offset, uint size, void* data);
+
+			static void* map_buffer(GPUID ID, GLBUFFTARGET target = GLBUFFTARGET::VBO);
+
+			static bool unmap_buffer(GLBUFFTARGET target = GLBUFFTARGET::VBO);
+
 			// EBO functions
 
 			// TO-DO Support for different types of data (GL_UNSIGNED_SHORT ...)
-			static GPUID create_ebo(uint data[], size_t size, BUFF_USAGE usage = BUFF_USAGE::STATIC);
+			static GPUID create_ebo(uint data[], size_t size, GLBUFFUSAGE usage = GLBUFFUSAGE::STATIC);
 
 			static void bind_ebo(GPUID ID);
 
