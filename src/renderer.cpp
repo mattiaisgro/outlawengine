@@ -80,6 +80,29 @@ void outlaw::Renderer::destroy_vao(GPUID ID) {
 
 // VBO functions
 
+// void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<vec2>* UVs, std::vector<vec3>* normals,
+// 						GPUID* VBO, GPUID* VAO) {
+
+// 	*VAO = Renderer::create_vao();
+
+
+
+
+// 	VAOAttrib attributes[] = {
+// 		VAOAttrib(),
+// 		VAOAttrib(),
+// 		VAOAttrib()
+// 	}
+
+// }
+
+// void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<uint>* indices, std::vector<vec2>* UVs,
+// 			std::vector<vec3>* normals, GPUID* VBO, GPUID* VAO, GPUID* EBO) {
+
+
+
+// }
+
 GPUID outlaw::Renderer::create_buffer(float data[], size_t size, GLBUFFUSAGE usage) {
 
 	unsigned int VBO;
@@ -426,6 +449,14 @@ void outlaw::Renderer::reshape(uint width, uint height) {
 void outlaw::Renderer::clear_screen(vec3 color) {
 	glClearColor(color.x, color.y, color.z, 1.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+}
+
+void outlaw::Renderer::flush(bool wait) {
+
+	if(wait)
+		glFinish();
+	else
+		glFlush();
 }
 
 // State functions

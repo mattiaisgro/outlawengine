@@ -92,10 +92,21 @@ namespace outlaw {
 
 			// VBO functions
 
-			// TO-DO
-			// static void create_mesh_buffer(std::vector<vec3>& vertices,
-			// 								std::vector<vec3>& normals,
-			// 								std::vector<vec2>& UVs);
+			// static void create_mesh_buffer(std::vector<vec3>* vertices,
+			// 								std::vector<vec2>* UVs,
+			// 								std::vector<vec3>* normals,
+			// 								GPUID* VBO,
+			// 								GPUID* VAO
+			// 								);
+
+			// static void create_mesh_buffer(std::vector<vec3>* vertices,
+			// 								std::vector<uint>* indices,
+			// 								std::vector<vec2>* UVs,
+			// 								std::vector<vec3>* normals,
+			// 								GPUID* VBO,
+			// 								GPUID* VAO,
+			// 								GPUID* EBO
+			// 								);
 
 			static GPUID create_buffer(float data[], size_t size, GLBUFFUSAGE usage = GLBUFFUSAGE::STATIC);
 
@@ -172,6 +183,8 @@ namespace outlaw {
 			static void reshape(uint width, uint height);
 
 			static void clear_screen(vec3 color = vec3(0, 0, 0));
+
+			static void flush(bool wait = false);
 
 			// State functions
 

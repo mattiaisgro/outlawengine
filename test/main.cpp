@@ -97,6 +97,7 @@ int main(int argc, char const *argv[]) {
 
 
 		// End loop
+		Renderer::flush();
 		Window::swapBuffers();
 		Window::pollEvents();
 	}
