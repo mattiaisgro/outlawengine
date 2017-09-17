@@ -30,6 +30,10 @@ test: static shared
 	@echo + Compiling tests...
 	@${CC} test/main.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/main.exe
 
+glinfo:
+	@echo + Compiling GLInfo...
+	@${CC} test/glinfo.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/glinfo.exe
+
 copy:
 	@cp lib/win32/libglfw3.so test/glfw3.dll
 	@cp bin/lib${LIBNAME}.so test/${LIBNAME}.dll

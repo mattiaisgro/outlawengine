@@ -30,8 +30,6 @@ void outlaw::Renderer::init() {
 	glGetIntegerv(GL_MAJOR_VERSION, &major);
 	glGetIntegerv(GL_MINOR_VERSION, &minor);
 
-	printlog("OpenGL version is ", major, ".", minor);
-
 	if(major < 4) {
 		printerror("OpenGL version is too low");
 		Window::destroy();
@@ -93,6 +91,8 @@ void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<vec2>* UVs, std
 		VAOAttrib(),
 		VAOAttrib()
 	};
+
+	Renderer::setup_vao(attributes, 3);
 
 }
 
