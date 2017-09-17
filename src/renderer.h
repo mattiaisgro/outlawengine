@@ -2,6 +2,7 @@
 #define OUTLAW_RENDERER_H
 #include "types.h"
 #include "vaoattrib.h"
+#include <vector>
 
 namespace outlaw {
 
@@ -92,21 +93,21 @@ namespace outlaw {
 
 			// VBO functions
 
-			// static void create_mesh_buffer(std::vector<vec3>* vertices,
-			// 								std::vector<vec2>* UVs,
-			// 								std::vector<vec3>* normals,
-			// 								GPUID* VBO,
-			// 								GPUID* VAO
-			// 								);
+			static void create_mesh_buffer(std::vector<vec3>* vertices,
+											std::vector<vec2>* UVs,
+											std::vector<vec3>* normals,
+											GPUID* VBO,
+											GPUID* VAO
+											);
 
-			// static void create_mesh_buffer(std::vector<vec3>* vertices,
-			// 								std::vector<uint>* indices,
-			// 								std::vector<vec2>* UVs,
-			// 								std::vector<vec3>* normals,
-			// 								GPUID* VBO,
-			// 								GPUID* VAO,
-			// 								GPUID* EBO
-			// 								);
+			static void create_mesh_buffer(std::vector<vec3>* vertices,
+											std::vector<uint>* indices,
+											std::vector<vec2>* UVs,
+											std::vector<vec3>* normals,
+											GPUID* VBO,
+											GPUID* VAO,
+											GPUID* EBO
+											);
 
 			static GPUID create_buffer(float data[], size_t size, GLBUFFUSAGE usage = GLBUFFUSAGE::STATIC);
 

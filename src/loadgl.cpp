@@ -5,6 +5,9 @@
 
 using namespace GL;
 
+#ifndef LOADGL_MINIMAL
+std::map<std::string, bool> GL::glextensions;
+#endif
 
 #ifdef WIN32
 
@@ -28,13 +31,13 @@ static void free_lib() {
 	FreeLibrary(lib);
 }
 
-void_func_ptr GL::glGetProcAddress(const char *name) {
+gl_func GL::glGetProcAddress(const char *name) {
 
-	void_func_ptr ptr = (void_func_ptr) wglGetProcAddress(name);
+	gl_func ptr = (gl_func) wglGetProcAddress(name);
 	if (!ptr)
-		ptr = (void_func_ptr) GetProcAddress(lib, name);
+		ptr = (gl_func) GetProcAddress(lib, name);
 
-	return (void_func_ptr) ptr;
+	return (gl_func) ptr;
 }
 
 #elif defined(__linux__)
@@ -62,11 +65,11 @@ static void free_lib() {
 	dlclose(lib);
 }
 
-void_func_ptr GL::glGetProcAddress(const char *name) {
+gl_func GL::glGetProcAddress(const char *name) {
 
-	void_func_ptr ptr = (void_func_ptr) glXGetProcAddress_((const GLubyte *) name);
+	gl_func ptr = (gl_func) glXGetProcAddress_((const GLubyte *) name);
 	if (!ptr)
-		ptr = (void_func_ptr) dlsym(lib, name);
+		ptr = (gl_func) dlsym(lib, name);
 	return ptr;
 }
 #endif
@@ -820,8 +823,6 @@ PFNGLVIEWPORTINDEXEDFVPROC GL::gl_ViewportIndexedfv;
 PFNGLWAITSYNCPROC  GL::gl_WaitSync;
 
 void load_funcs() {
-
-	using namespace GL;
 
 	gl_ActiveShaderProgram = (PFNGLACTIVESHADERPROGRAMPROC) glGetProcAddress("glActiveShaderProgram");
 	gl_ActiveTexture = (PFNGLACTIVETEXTUREPROC) glGetProcAddress("glActiveTexture");

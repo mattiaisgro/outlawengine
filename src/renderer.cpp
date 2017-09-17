@@ -80,28 +80,28 @@ void outlaw::Renderer::destroy_vao(GPUID ID) {
 
 // VBO functions
 
-// void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<vec2>* UVs, std::vector<vec3>* normals,
-// 						GPUID* VBO, GPUID* VAO) {
+void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<vec2>* UVs, std::vector<vec3>* normals,
+						GPUID* VBO, GPUID* VAO) {
 
-// 	*VAO = Renderer::create_vao();
-
-
-
-
-// 	VAOAttrib attributes[] = {
-// 		VAOAttrib(),
-// 		VAOAttrib(),
-// 		VAOAttrib()
-// 	}
-
-// }
-
-// void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<uint>* indices, std::vector<vec2>* UVs,
-// 			std::vector<vec3>* normals, GPUID* VBO, GPUID* VAO, GPUID* EBO) {
+	*VAO = Renderer::create_vao();
 
 
 
-// }
+
+	VAOAttrib attributes[] = {
+		VAOAttrib(),
+		VAOAttrib(),
+		VAOAttrib()
+	};
+
+}
+
+void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<uint>* indices, std::vector<vec2>* UVs,
+			std::vector<vec3>* normals, GPUID* VBO, GPUID* VAO, GPUID* EBO) {
+
+
+
+}
 
 GPUID outlaw::Renderer::create_buffer(float data[], size_t size, GLBUFFUSAGE usage) {
 

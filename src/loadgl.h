@@ -19,16 +19,16 @@
 
 namespace GL {
 
-	typedef void(*void_func_ptr)();
+	typedef void(*gl_func)();
 
 #ifndef LOADGL_MINIMAL
-	static std::map<std::string, bool> glextensions;
+	extern std::map<std::string, bool> glextensions;
 #endif
 
 	/*
 	* Returns a function pointer to the requested OpenGL function.
 	*/
-	void_func_ptr glGetProcAddress(const char* name);
+	gl_func glGetProcAddress(const char* name);
 
 	/*
 	* Checks wether the asked extension is supported.

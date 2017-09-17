@@ -83,6 +83,11 @@ int main(int argc, char const *argv[]) {
 			camera.view.translate(vec3(0, 0.01f, 0));
 		}
 
+		if(Input::isPressed(KEY_SPACE)) {
+
+			camera.view.identity();
+		}
+
 
 		// Render
 		Renderer::clear_screen();
