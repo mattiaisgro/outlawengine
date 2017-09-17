@@ -50,10 +50,10 @@ namespace outlaw {
 	};
 
 	enum class GLFACE {
-		GL_BACK = 0x0405,
-		GL_FRONT = 0x0404,
-		GL_FRONT_AND_BACK = 0x0408
-	}
+		BACK = 0x0405,
+		FRONT = 0x0404,
+		FRONT_AND_BACK = 0x0408
+	};
 
 	enum class GLFRAMEBUFFERACCESS {
 		ALL = 0x8D40,

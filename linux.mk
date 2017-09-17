@@ -1,4 +1,5 @@
 include config.mk
+LIBRARIES=-lGL -lglfw
 
 default_target: all
 
@@ -26,7 +27,7 @@ test: static shared
 	@${CC} test/main.cpp ${TESTFLAGS} ${LIBRARIES} -o test/main
 
 copy:
-	@cp lib/linux/libglfw3.so test/glw3.so
+	#@cp lib/linux/libglfw3.so test/glw3.so
 	@cp bin/lib${LIBNAME}.so test/lib${LIBNAME}.so
 
 all: static shared clean test copy
