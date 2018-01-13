@@ -9,7 +9,6 @@ namespace outlaw {
 	class Shader {
 		private:
 			GPUID ID;
-			std::map<std::string, GPUID> uniform_locations; // TO-DO
 
 		public:
 

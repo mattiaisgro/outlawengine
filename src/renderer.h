@@ -81,6 +81,9 @@ namespace outlaw {
 
 			// VAO functions
 
+			/*
+			* Creates a new VAO buffer
+			*/
 			static GPUID create_vao();
 
 			static void setup_vao(VAOAttrib attributes[], uint count);
@@ -93,17 +96,22 @@ namespace outlaw {
 
 			// VBO functions
 
-			static void create_mesh_buffer(std::vector<vec3>* vertices,
-											std::vector<vec2>* UVs,
-											std::vector<vec3>* normals,
+			/*
+			* Creates a VBO and a VAO for mesh rendering
+			* Returns 0 on success
+			* Returns -1 if parameters are invalid
+			*/
+			static int create_mesh_buffer(const std::vector<vec3>& vertices,
+											const std::vector<vec2>& UVs,
+											const std::vector<vec3>& normals,
 											GPUID* VBO,
 											GPUID* VAO
 											);
 
-			static void create_mesh_buffer(std::vector<vec3>* vertices,
-											std::vector<uint>* indices,
-											std::vector<vec2>* UVs,
-											std::vector<vec3>* normals,
+			static int create_mesh_buffer(const std::vector<vec3>& vertices,
+											const std::vector<uint>& indices,
+											const std::vector<vec2>& UVs,
+											const std::vector<vec3>& normals,
 											GPUID* VBO,
 											GPUID* VAO,
 											GPUID* EBO

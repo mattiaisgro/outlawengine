@@ -44,7 +44,6 @@ GPUID outlaw::Renderer::create_vao() {
 
 	GPUID ID;
 	glGenVertexArrays(1, &ID);
-	glBindVertexArray(ID);
 
 	return ID;
 }
@@ -78,13 +77,39 @@ void outlaw::Renderer::destroy_vao(GPUID ID) {
 
 // VBO functions
 
-void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<vec2>* UVs, std::vector<vec3>* normals,
+int create_mesh_buffer(const std::vector<vec3>& vertices, const std::vector<vec2>& UVs, const std::vector<vec3>& normals,
 						GPUID* VBO, GPUID* VAO) {
+
+	if(!(vertices.size() | UVs.size() | normals.size() | (int) VBO | (int) VAO)) {
+		return -1;
+	}
+
+	float* buffer = new float[vertices.size() + UVs.size() + normals.size()];
+
+	float* vertices_ptr = (float*) &(vertices[0]);
+	float* UVs_ptr = (float*) &(UVs[0]);
+	float* normals_ptr = (float*) &(normals[0]);
+	unsigned int offset = 0;
+
+	for (unsigned int i = 0; i < vertices.size(); ++i) {
+		buffer[i + offset] = vertices_ptr[i];
+	}
+
+	offset += vertices.size();
+
+	for (unsigned int i = 0; i < UVs.size(); ++i) {
+		buffer[i + offset] = UVs_ptr[i];
+	}
+
+	offset += UVs.size();
+
+	for (unsigned int i = 0; i < normals.size(); ++i) {
+		buffer[i + offset] = normals_ptr[i];
+	}
 
 	*VAO = Renderer::create_vao();
 
-
-
+	*VBO = Renderer::create_buffer(buffer, offset + normals.size(), GLBUFFUSAGE::STATIC);
 
 	VAOAttrib attributes[] = {
 		VAOAttrib(),
@@ -94,13 +119,14 @@ void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<vec2>* UVs, std
 
 	Renderer::setup_vao(attributes, 3);
 
+	return 0;
 }
 
-void create_mesh_buffer(std::vector<vec3>* vertices, std::vector<uint>* indices, std::vector<vec2>* UVs,
-			std::vector<vec3>* normals, GPUID* VBO, GPUID* VAO, GPUID* EBO) {
+int create_mesh_buffer(const std::vector<vec3>& vertices, const std::vector<uint>& indices, const std::vector<vec2>& UVs,
+			const std::vector<vec3>& normals, GPUID* VBO, GPUID* VAO, GPUID* EBO) {
 
 
-
+	return 0;
 }
 
 GPUID outlaw::Renderer::create_buffer(float data[], size_t size, GLBUFFUSAGE usage) {
