@@ -3,9 +3,6 @@
 
 #include "../include/GLFW/glfw3.h"
 
-#include "uroboro/utility.h"
-using namespace uroboro;
-
 using namespace outlaw;
 
 int main(int argc, char const *argv[]) {
@@ -16,7 +13,7 @@ int main(int argc, char const *argv[]) {
 	Shader default_shader = load_default_shader();
 	// Create VAO and set it up
 
-	Primitive square = create_square(0.5f);
+	Primitive square = create_graph_from_function(sin, 0, 2 * PI, 1000, 5);
 
 	// Create default camera
 	BasicCamera camera = BasicCamera();
@@ -62,15 +59,17 @@ int main(int argc, char const *argv[]) {
 
 
 		// Render
-		Renderer::clear_screen();
+		Renderer::clear_screen(vec3(1, 1, 1));
+
 
 		square.model = mat4();
-		square.model.translate(sin(glfwGetTime() * (10 / (2.f * PI))) / 2.f, cos(glfwGetTime() * (10 / (2.f * PI))) / 2.f, 0);
+		square.model.translate(-1, 0, 0);
 
 		mat4 MVP = camera.projection * camera.view * square.model;
 		default_shader.setUniform("transform", MVP);
 
 		render_primitive(square);
+
 
 		// End loop
 		Renderer::flush();

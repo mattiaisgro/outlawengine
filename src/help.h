@@ -1,6 +1,7 @@
 #ifndef OUTLAW_HELP_H
 #define OUTLAW_HELP_H
 #include "outlaw.h"
+#include "uroboro/utility.h"
 
 using namespace outlaw;
 
@@ -13,19 +14,21 @@ struct Primitive {
 	GPUID VBO;
 	mat4 model;
 	unsigned int size;
+	GLPRIMITIVE primitive_type;
 
-	Primitive(GPUID VAO, GPUID VBO, mat4 model, unsigned int size) : VAO(VAO), VBO(VBO), model(model), size(size) {}
+	Primitive(GPUID VAO, GPUID VBO, mat4 model, unsigned int size, GLPRIMITIVE primitive_type) :
+				VAO(VAO), VBO(VBO), model(model), size(size), primitive_type(primitive_type) {}
 };
 
 
-void render_primitive(Primitive p, GLPRIMITIVE primitive_type = GLPRIMITIVE::TRIANGLE_STRIP) {
+void render_primitive(Primitive p) {
 
 	Renderer::bind_vao(p.VAO);
-	Renderer::draw_buffer(p.size, primitive_type);
+	Renderer::draw_buffer(p.size, p.primitive_type);
 }
 
 
-inline Primitive create_primitive(vec3 vertices[], unsigned int size) {
+inline Primitive create_primitive(vec3 vertices[], unsigned int size, GLPRIMITIVE primitive_type = GLPRIMITIVE::TRIANGLE_STRIP) {
 	GPUID VAO = Renderer::create_vao();
 	Renderer::bind_vao(VAO);
 
@@ -35,7 +38,7 @@ inline Primitive create_primitive(vec3 vertices[], unsigned int size) {
 
 	Renderer::setup_vao(attributes, sizeof(attributes) / sizeof(VAOAttrib));
 
-	return Primitive(VAO, VBO, mat4(), size / sizeof(vec3));
+	return Primitive(VAO, VBO, mat4(), size / sizeof(vec3), primitive_type);
 }
 
 
@@ -72,6 +75,43 @@ inline Primitive create_cube(float width, float height, float depth) {
 	};
 
 	return create_primitive(vertices, sizeof(vertices));
+}
+
+
+inline Primitive create_circle(float radius, int steps = 64) {
+
+	std::vector<vec3> vertices;
+
+	float dx = (2 * PI) / (float) steps;
+
+	vertices.push_back(vec3(0, 0, 0)); // center
+
+	for (float i = 0; i < (2 * PI); i += dx) {
+
+		vertices.push_back(vec3(cos(i) * radius, sin(i) * radius, 0));
+		vertices.push_back(vec3(cos(i + dx) * radius, sin(i + dx) * radius, 0));
+	}
+
+	return create_primitive(&vertices[0], vertices.size() * 3 * 4, GLPRIMITIVE::TRIANGLE_FAN);
+}
+
+
+inline Primitive create_graph_from_function(float(*func)(float), float a, float b, int steps = 1000, float scale = 1) {
+
+	float dx = (b - a) / (float) steps;
+
+	std::vector<vec3> vertices;
+	vec3 prev = vec3(a, func(a), 0);
+	vec3 curr;
+
+	for (float i = a; i < b + dx; i += dx) {
+		vertices.push_back(prev);
+		curr = vec3(i / scale, func(i) / scale, 0);
+		vertices.push_back(curr);
+		prev = curr;
+	}
+
+	return create_primitive(&vertices[0], vertices.size() * 3 * 4, GLPRIMITIVE::LINES);
 }
 
 
