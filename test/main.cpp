@@ -13,11 +13,15 @@ int main(int argc, char const *argv[]) {
 	Shader default_shader = load_default_shader();
 	// Create VAO and set it up
 
-	Primitive square = create_graph_from_function(sin, 0, 2 * PI, 1000, 5);
+	Primitive circle = create_circle(0.5f);
+	Primitive square = create_square(0.33f);
+	Primitive graph = create_graph_from_function(sin, 0, 2 * PI, 500, 0.25f);
 
 	// Create default camera
 	BasicCamera camera = BasicCamera();
-	camera.perspective(90, Window::getAspectRatio(), 0.1f, 100);
+	float ratio = Window::getAspectRatio();
+	float scene_scale = 2.0f;
+	camera.ortho(-ratio * scene_scale, ratio * scene_scale, -1 * scene_scale, 1 * scene_scale, 0.1f, 100);
 
 	// Game loop (rudimental)
 	while(!Window::getShouldClose()) {
@@ -59,16 +63,16 @@ int main(int argc, char const *argv[]) {
 
 
 		// Render
-		Renderer::clear_screen(vec3(1, 1, 1));
+		Renderer::clear_screen(vec3(0.999f, 0.999f, 0.999f));
 
 
-		square.model = mat4();
-		square.model.translate(-1, 0, 0);
-
-		mat4 MVP = camera.projection * camera.view * square.model;
+		update_graph_from_function(graph, sin, glfwGetTime(), glfwGetTime() + (2 * PI), 500, 0.25f);
+		graph.model = mat4();
+		graph.model.translate(-PI - glfwGetTime() / 4.f, 0, 0);
+		mat4 MVP = camera.projection * camera.view * graph.model;
 		default_shader.setUniform("transform", MVP);
-
-		render_primitive(square);
+		default_shader.setUniform("mesh_color", vec3(1, 0, 0));
+		render_primitive(graph);
 
 
 		// End loop
@@ -76,6 +80,10 @@ int main(int argc, char const *argv[]) {
 		Window::swapBuffers();
 		Window::pollEvents();
 	}
+
+	Window::destroy();
+
+	std::cin.get();
 
 	return 0;
 }

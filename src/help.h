@@ -28,7 +28,10 @@ void render_primitive(Primitive p) {
 }
 
 
-inline Primitive create_primitive(vec3 vertices[], unsigned int size, GLPRIMITIVE primitive_type = GLPRIMITIVE::TRIANGLE_STRIP) {
+inline Primitive create_primitive(vec3 vertices[], unsigned int size,
+									GLPRIMITIVE primitive_type = GLPRIMITIVE::TRIANGLE_STRIP,
+									GLBUFFUSAGE usage = GLBUFFUSAGE::STATIC) {
+
 	GPUID VAO = Renderer::create_vao();
 	Renderer::bind_vao(VAO);
 
@@ -39,6 +42,13 @@ inline Primitive create_primitive(vec3 vertices[], unsigned int size, GLPRIMITIV
 	Renderer::setup_vao(attributes, sizeof(attributes) / sizeof(VAOAttrib));
 
 	return Primitive(VAO, VBO, mat4(), size / sizeof(vec3), primitive_type);
+}
+
+
+inline void update_primitive(Primitive p, vec3 vertices[], unsigned int size) {
+
+	Renderer::update_buffer(p.VBO, GLBUFFTARGET::VBO, 0, size, (void*) vertices);
+
 }
 
 
@@ -81,7 +91,6 @@ inline Primitive create_cube(float width, float height, float depth) {
 inline Primitive create_circle(float radius, int steps = 64) {
 
 	std::vector<vec3> vertices;
-
 	float dx = (2 * PI) / (float) steps;
 
 	vertices.push_back(vec3(0, 0, 0)); // center
@@ -101,17 +110,36 @@ inline Primitive create_graph_from_function(float(*func)(float), float a, float 
 	float dx = (b - a) / (float) steps;
 
 	std::vector<vec3> vertices;
-	vec3 prev = vec3(a, func(a), 0);
+	vec3 prev = vec3(a * scale, func(a) * scale, 0);
 	vec3 curr;
 
 	for (float i = a; i < b + dx; i += dx) {
 		vertices.push_back(prev);
-		curr = vec3(i / scale, func(i) / scale, 0);
+		curr = vec3(i * scale, func(i) * scale, 0);
 		vertices.push_back(curr);
 		prev = curr;
 	}
 
-	return create_primitive(&vertices[0], vertices.size() * 3 * 4, GLPRIMITIVE::LINES);
+	return create_primitive(&vertices[0], vertices.size() * 3 * 4, GLPRIMITIVE::LINES, GLBUFFUSAGE::DYNAMIC);
+}
+
+
+inline void update_graph_from_function(Primitive p, float(*func)(float), float a, float b, int steps = 1000, float scale = 1) {
+
+	float dx = (b - a) / (float) steps;
+
+	std::vector<vec3> vertices;
+	vec3 prev = vec3(a * scale, func(a) * scale, 0);
+	vec3 curr;
+
+	for (float i = a; i < b + dx; i += dx) {
+		vertices.push_back(prev);
+		curr = vec3(i * scale, func(i) * scale, 0);
+		vertices.push_back(curr);
+		prev = curr;
+	}
+
+	update_primitive(p, &vertices[0], vertices.size() * 3 * 4);
 }
 
 

@@ -31,6 +31,10 @@ namespace uroboro {
 			std::cout << vector.x << ", " << vector.y << ", " << vector.z << ", " << vector.w << std::endl;
 		}
 
+		inline void print_vec(vec3 vector) {
+			std::cout << vector.x << ", " << vector.y << ", " << vector.z << std::endl;
+		}
+
 		inline void start_clock(std::clock_t& clock) {
 			clock = std::clock();
 		}
