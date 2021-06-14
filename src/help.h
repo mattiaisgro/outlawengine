@@ -105,17 +105,37 @@ inline Primitive create_circle(float radius, int steps = 64) {
 }
 
 
+inline Primitive create_line(vec3 a, vec3 b) {
+
+	vec3 v[2];
+	v[0] = a;
+	v[1] = b;
+
+	return create_primitive(v, 2 * 3 * 4, GLPRIMITIVE::LINES, GLBUFFUSAGE::DYNAMIC);
+}
+
+
+// inline void update_line(vec3 a, vec3 b) {
+
+// 	vec3 v[2];
+// 	v[0] = a;
+// 	v[1] = b;
+
+// 	update_primitive((void*) v, 2 * 3 * 4);
+// }
+
+
 inline Primitive create_graph_from_function(float(*func)(float), float a, float b, int steps = 1000, float scale = 1) {
 
 	float dx = (b - a) / (float) steps;
 
 	std::vector<vec3> vertices;
-	vec3 prev = vec3(a * scale, func(a) * scale, 0);
+	vec3 prev = vec3(0, func(a) * scale, 0);
 	vec3 curr;
 
 	for (float i = a; i < b + dx; i += dx) {
 		vertices.push_back(prev);
-		curr = vec3(i * scale, func(i) * scale, 0);
+		curr = vec3((i - a) * scale, func(i) * scale, 0);
 		vertices.push_back(curr);
 		prev = curr;
 	}
@@ -145,7 +165,7 @@ inline void update_graph_from_function(Primitive p, float(*func)(float), float a
 
 inline Shader load_default_shader() {
 
-	Shader default_shader("../res/default.glsl");
+	Shader default_shader = Shader("../res/default.glsl");
 	default_shader.bind();
 	return default_shader;
 }

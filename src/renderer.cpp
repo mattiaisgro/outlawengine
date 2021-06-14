@@ -503,15 +503,20 @@ void outlaw::Renderer::set_culling(bool b) {
 		glDisable(GL_CULL_FACE);
 }
 
-void set_culling_face(GLFACE face) {
+void outlaw::Renderer::set_culling_face(GLFACE face) {
 
 	glCullFace((GLenum) face);
 }
 
-void set_culling_front_face(bool clockwise) {
+void outlaw::Renderer::set_culling_front_face(bool clockwise) {
 
 	if(clockwise)
 		glFrontFace(GL_CW);
 	else
 		glFrontFace(GL_CCW);
+}
+
+void outlaw::Renderer::set_line_width(float width) {
+
+	glLineWidth(width);
 }

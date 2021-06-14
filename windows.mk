@@ -1,5 +1,7 @@
 include config.mk
 
+.PHONY: static shared clean test
+
 default_target: all
 
 LIBRARIES = -L./lib/win32/ -lopengl32 -lgdi32 -lglfw3
@@ -33,6 +35,10 @@ test: static shared
 glinfo:
 	@echo + Compiling GLInfo...
 	@${CC} test/glinfo.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/glinfo.exe
+
+doublependulum:
+	@echo + Compiling DoublePendulum...
+	@${CC} test/doublependulum.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/doublependulum.exe
 
 copy:
 	@cp lib/win32/libglfw3.so test/glfw3.dll

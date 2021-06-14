@@ -205,6 +205,8 @@ namespace outlaw {
 
 			static void set_culling_front_face(bool clockwise = false);
 
+			static void set_line_width(float width);
+
 
 	};
 

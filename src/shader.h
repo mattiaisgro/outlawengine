@@ -46,6 +46,10 @@ namespace outlaw {
 
 			void setUniform(std::string uniform, mat4 m);
 
+			inline GPUID getID() {
+				return ID;
+			}
+
 
 	};
 

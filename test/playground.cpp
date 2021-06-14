@@ -37,5 +37,9 @@ int main(int argc, char const *argv[]) {
 		Window::pollEvents();
 	}
 
+	Window::destroy();
+
+	std::cin.get();
+
 	return 0;
 }
