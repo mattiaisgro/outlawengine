@@ -12,3 +12,14 @@ All instructions on how to compile GLFW are [here](http://glfw.org)
 * Uroboro _(included)_
 * GLFW 3 _(only headers included)_
 * loadgl _(included)_
+
+### Example usage
+
+#### Lissajous curve rendering
+
+![Lissajous Curve](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/Lissajous/lissajous_1_2.png)
+![Lissajous Curve](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/Lissajous/lissajous_1_3.png)
+![Lissajous Curve](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/Lissajous/lissajous_3_1.png)
+![Lissajous Curve](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/Lissajous/lissajous_7_11.png)
+![Lissajous Curve](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/Lissajous/lissajous_phi.png)
+
