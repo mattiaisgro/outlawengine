@@ -40,6 +40,10 @@ doublependulum:
 	@echo + Compiling DoublePendulum...
 	@${CC} test/doublependulum.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/doublependulum.exe
 
+lissajous:
+	@echo + Compiling Lissajous...
+	@${CC} test/lissajous.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/lissajous.exe
+
 copy:
 	@cp lib/win32/libglfw3.so test/glfw3.dll
 	@cp bin/lib${LIBNAME}.so test/${LIBNAME}.dll
