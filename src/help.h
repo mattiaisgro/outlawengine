@@ -18,6 +18,11 @@ struct Primitive {
 
 	Primitive(GPUID VAO, GPUID VBO, mat4 model, unsigned int size, GLPRIMITIVE primitive_type) :
 				VAO(VAO), VBO(VBO), model(model), size(size), primitive_type(primitive_type) {}
+
+	Primitive() {
+		VBO = 0;
+		VAO = 0;
+	}
 };
 
 

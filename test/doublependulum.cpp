@@ -24,7 +24,7 @@ int main(int argc, char const *argv[]) {
 	println("Press T to toggle trail");
 	println("Press S to toggle spheres");
 
-	Window::create("Double Pendulum Simulation");
+	Window::create("Double Pendulum Simulation", 720, 720);
 	Shader default_shader = Shader("default.glsl");
 	default_shader.bind();
 
@@ -59,16 +59,16 @@ int main(int argc, char const *argv[]) {
 
 	// Physical system setup
 
-	real g = 5; // Gravity
+	real g = 1; // Gravity
 
-	real theta1 = PI; // Theta of the first pendulum
-	real theta2 = PI; // Theta of the second pendulum
+	real theta1 = PI / 1.25; // Theta of the first pendulum
+	real theta2 = PI / 1.75; // Theta of the second pendulum
 
 	real L1 = 0.4; // Length of the first pendulum
-	real L2 = 0.4; // Length of the second pendulum
+	real L2 = 0.2; // Length of the second pendulum
 
-	real m1 = 5; // Mass of the first pendulum
-	real m2 = 5; // Mass of the second pendulum
+	real m1 = 10; // Mass of the first pendulum
+	real m2 = 1; // Mass of the second pendulum
 
 	real omega1 = 0; // Omega of the first pendulum
 	real omega2 = 0; // Omega of the second pendulum
@@ -191,6 +191,8 @@ int main(int argc, char const *argv[]) {
 				MVP.translate(trace_pos[i]);
 				default_shader.setUniform("transform", MVP);
 				render_primitive(trace[i]);
+
+				// TO-DO Line Strip
 			}
 		}
 

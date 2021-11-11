@@ -276,6 +276,10 @@ void outlaw::Window::setWindowHint(int hint, int value) {
 	glfwWindowHint(hint, value);
 }
 
+static void* getID() {
+	return ID;
+}
+
 bool outlaw::Window::getsRGB() {
 	return sRGB;
 }
@@ -293,3 +297,8 @@ void outlaw::Window::reshape() {
 	glfwGetFramebufferSize(WINDOWID, &h, &w);
 	Renderer::reshape(h, w);
 }
+
+
+// double outlaw::Window::getTime() {
+// 	return 0;
+// }

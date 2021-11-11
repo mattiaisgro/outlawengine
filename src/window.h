@@ -125,11 +125,11 @@ namespace outlaw {
 
 			static void setWindowHint(int hint, int value);
 
-			static inline void* getID() {
-				return ID;
-			}
+			static void* getID();
 
 			static void reshape();
+
+			// static double getTime();
 
 		private:
 			static void initCallbacks();

@@ -132,6 +132,10 @@ namespace uroboro {
 				return vec3(x * scalar, y * scalar, z * scalar);
 			}
 
+			inline vec3 operator/(real scalar) {
+				return vec3(x / scalar, y / scalar, z / scalar);
+			}
+
 			inline void operator=(vec3 const& other) {
 				x = other.x;
 				y = other.y;

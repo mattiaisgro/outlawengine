@@ -44,6 +44,22 @@ lissajous:
 	@echo + Compiling Lissajous...
 	@${CC} test/lissajous.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/lissajous.exe
 
+diffeq:
+	@echo + Compiling DifferentialEquations...
+	@${CC} test/diffeq.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/diffeq.exe
+
+diffeq_trace:
+	@echo + Compiling DifferentialEquationsTrace...
+	@${CC} test/diffeq_trace.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/diffeq_trace.exe
+
+bezier:
+	@echo + Compiling BezierCurves...
+	@${CC} test/bezier.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/bezier.exe
+
+bezier_animation:
+	@echo + Compiling BezierAnimation...
+	@${CC} test/bezier_animation.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/bezier_animation.exe
+
 copy:
 	@cp lib/win32/libglfw3.so test/glfw3.dll
 	@cp bin/lib${LIBNAME}.so test/${LIBNAME}.dll
