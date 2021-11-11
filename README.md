@@ -23,3 +23,11 @@ All instructions on how to compile GLFW are [here](http://glfw.org)
 ![Lissajous Curve](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/Lissajous/lissajous_7_11.png)
 ![Lissajous Curve](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/Lissajous/lissajous_phi.png)
 
+### Double pendulum simulation
+![Double Pendulum](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/DoublePendulum/doublependulum1.png)
+
+### Bezier curve rendering (example animation)
+![Bezier Animation](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/BezierAnimation/bezier_animation.png)
+
+### Differential equations
+![Differential equation](https://raw.githubusercontent.com/mattiaisgro/outlawengine/master/test/DiffEqTrace/x2_m_x3.png)
