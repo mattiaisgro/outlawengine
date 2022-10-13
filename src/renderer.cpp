@@ -415,6 +415,24 @@ void outlaw::Renderer::destroy_shader(GPUID ID) {
 	glDeleteShader(ID);
 }
 
+void outlaw::Renderer::set_shader_uniform(GPUID ID, std::string uniform, float value) {
+
+	unsigned int location = glGetUniformLocation(ID, uniform.c_str());
+	glUniform1f(location, value);
+}
+
+void outlaw::Renderer::set_shader_uniform(GPUID ID, std::string uniform, double value) {
+
+	unsigned int location = glGetUniformLocation(ID, uniform.c_str());
+	glUniform1d(location, value);
+}
+
+void outlaw::Renderer::set_shader_uniform(GPUID ID, std::string uniform, vec2 value) {
+
+	unsigned int location = glGetUniformLocation(ID, uniform.c_str());
+	glUniform2f(location, value.x, value.y);
+}
+
 void outlaw::Renderer::set_shader_uniform(GPUID ID, std::string uniform, vec3 value) {
 
 	unsigned int location = glGetUniformLocation(ID, uniform.c_str());

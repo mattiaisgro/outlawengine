@@ -276,10 +276,6 @@ void outlaw::Window::setWindowHint(int hint, int value) {
 	glfwWindowHint(hint, value);
 }
 
-static void* getID() {
-	return ID;
-}
-
 bool outlaw::Window::getsRGB() {
 	return sRGB;
 }

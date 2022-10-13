@@ -61,11 +61,11 @@ int main(int argc, char const *argv[]) {
 
 	real g = 1; // Gravity
 
-	real theta1 = PI / 1.25; // Theta of the first pendulum
-	real theta2 = PI / 1.75; // Theta of the second pendulum
+	real theta1 = PI / 2.0; // Theta of the first pendulum
+	real theta2 = PI / 3.0; // Theta of the second pendulum
 
-	real L1 = 0.4; // Length of the first pendulum
-	real L2 = 0.2; // Length of the second pendulum
+	real L1 = 0.5; // Length of the first pendulum
+	real L2 = 0.3; // Length of the second pendulum
 
 	real m1 = 10; // Mass of the first pendulum
 	real m2 = 1; // Mass of the second pendulum
@@ -96,7 +96,7 @@ int main(int argc, char const *argv[]) {
 
 		// Track the passing of time between frames
 		double curr_time = glfwGetTime();
-		dt = curr_time - prev_time;
+		dt = (curr_time - prev_time) / 5.0;
 
 
 		// Input handling
@@ -167,12 +167,12 @@ int main(int argc, char const *argv[]) {
 		}
 
 		// Render
-		Renderer::clear_screen(vec3(0.99f, 0.99f, 0.99f));
+		Renderer::clear_screen(vec3(0.05f, 0.05f, 0.05f));
 
 		mat4 model = mat4();
 		mat4 MVP = mat4();
 
-		default_shader.setUniform("mesh_color", vec3(0.01f, 0.01f, 0.01f));
+		default_shader.setUniform("mesh_color", vec3(0.99f, 0.99f, 0.99f));
 		default_shader.setUniform("transform", camera.view);
 
 		// Render lines
@@ -186,6 +186,9 @@ int main(int argc, char const *argv[]) {
 
 		// Render trail
 		if(trail) {
+
+			default_shader.setUniform("mesh_color", vec3(0.9f, 0.9f, 0.9f));
+
 			for (int i = 0; i < trace.size(); ++i) {
 				MVP = camera.projection * camera.view;
 				MVP.translate(trace_pos[i]);
@@ -198,7 +201,7 @@ int main(int argc, char const *argv[]) {
 
 		// Render origin point
 		MVP = camera.projection * camera.view * model;
-		default_shader.setUniform("mesh_color", vec3(0.01f, 0.01f, 0.01f));
+		default_shader.setUniform("mesh_color", vec3(0.99f, 0.99f, 0.99f));
 		default_shader.setUniform("transform", MVP);
 		render_primitive(origin);
 
@@ -214,7 +217,7 @@ int main(int argc, char const *argv[]) {
 			// Render second pendulum
 			MVP = camera.projection * camera.view * model;
 			MVP.translate(x2, y2, 0);
-			default_shader.setUniform("mesh_color", vec3(182.0 / 255.0, 25.0 / 255.0, 25.0 / 255.0));
+			default_shader.setUniform("mesh_color", vec3(50.0 / 255.0, 82.0 / 255.0, 136.0 / 255.0));
 			default_shader.setUniform("transform", MVP);
 			render_primitive(circle2);
 		}

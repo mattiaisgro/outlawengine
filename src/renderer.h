@@ -171,6 +171,12 @@ namespace outlaw {
 
 			static void destroy_shader(GPUID ID);
 
+			static void set_shader_uniform(GPUID ID, std::string uniform, float value);
+
+			static void set_shader_uniform(GPUID ID, std::string uniform, double value);
+
+			static void set_shader_uniform(GPUID ID, std::string uniform, vec2 value);
+
 			static void set_shader_uniform(GPUID ID, std::string uniform, vec3 value);
 
 			static void set_shader_uniform(GPUID ID, std::string uniform, vec4 value);

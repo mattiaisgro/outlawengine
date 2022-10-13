@@ -60,6 +60,14 @@ bezier_animation:
 	@echo + Compiling BezierAnimation...
 	@${CC} test/bezier_animation.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/bezier_animation.exe
 
+shader:
+	@echo + Compiling shader...
+	@${CC} test/shader.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/shader.exe
+
+plotpoints:
+	@echo + Compiling plotpoints...
+	@${CC} test/plotpoints.cpp ${TESTFLAGS} ${LIBRARIES}  -o test/plotpoints.exe
+
 copy:
 	@cp lib/win32/libglfw3.so test/glfw3.dll
 	@cp bin/lib${LIBNAME}.so test/${LIBNAME}.dll

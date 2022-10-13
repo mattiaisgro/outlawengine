@@ -40,9 +40,17 @@ namespace outlaw {
 
 			void destroy();
 
+			void setUniform(std::string uniform, int f);
+
+			void setUniform(std::string uniform, float f);
+
+			void setUniform(std::string uniform, double f);
+
 			void setUniform(std::string uniform, vec4 v);
 
 			void setUniform(std::string uniform, vec3 v);
+
+			void setUniform(std::string uniform, vec2 v);
 
 			void setUniform(std::string uniform, mat4 m);
 

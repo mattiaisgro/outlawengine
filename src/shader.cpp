@@ -59,11 +59,27 @@ void outlaw::Shader::destroy() {
 	Renderer::destroy_shader(ID);
 }
 
+void outlaw::Shader::setUniform(std::string uniform, int i) {
+	Renderer::set_shader_uniform(ID, uniform, i);
+}
+
+void outlaw::Shader::setUniform(std::string uniform, float f) {
+	Renderer::set_shader_uniform(ID, uniform, f);
+}
+
+void outlaw::Shader::setUniform(std::string uniform, double f) {
+	Renderer::set_shader_uniform(ID, uniform, f);
+}
+
 void outlaw::Shader::setUniform(std::string uniform, vec4 v) {
 	Renderer::set_shader_uniform(ID, uniform, v);
 }
 
 void outlaw::Shader::setUniform(std::string uniform, vec3 v) {
+	Renderer::set_shader_uniform(ID, uniform, v);
+}
+
+void outlaw::Shader::setUniform(std::string uniform, vec2 v) {
 	Renderer::set_shader_uniform(ID, uniform, v);
 }
 

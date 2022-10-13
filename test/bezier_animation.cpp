@@ -28,7 +28,6 @@ int main(int argc, char const *argv[]) {
 	camera.ortho(-ratio * scene_scale, ratio * scene_scale,
 		-1 * scene_scale, 1 * scene_scale, 0.1f, 100);
 
-
 	double dt = 0;
 	double curr_time = 0;
 	double prev_time = glfwGetTime();
